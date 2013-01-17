@@ -1,0 +1,3 @@
+[submodule "src/statistics"]
+	path = src/statistics
+	url = git@github.com:oangelo/PlusStatistics.git
