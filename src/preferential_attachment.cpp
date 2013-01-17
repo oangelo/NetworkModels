@@ -41,7 +41,7 @@ std::vector<Host> PreferentialAttachment(unsigned size, unsigned bins, double ma
             attach = Attachment(population[item], propability);
         }
     }
-    Histogram histogram(bins, 0, max);
+    Histogram histogram(bins, 1, max);
     for (size_t i = 0; i < size; ++i)
         histogram(population[i]);
     std::cout << histogram << std::endl;
