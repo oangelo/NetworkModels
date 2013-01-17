@@ -16,7 +16,7 @@ std::random_device rd;
 std::mt19937 gen(rd());
 
 bool Attachment(Host& host, double probability) {
-    std::uniform_real_distribution<> dis(0, probability);
+    std::uniform_real_distribution<> dis(0, 1);
     if(dis(gen) < probability){
         ++host;
         return true;
@@ -25,20 +25,27 @@ bool Attachment(Host& host, double probability) {
 }
 
 std::vector<Host> PreferentialAttachment(unsigned size, unsigned bins, double max) {
-    std::vector<Host> population;
+    Host host;
+    ++host;
+    unsigned connections = 5;
+    std::vector<Host> population(2 * connections, host);
+
+    unsigned successful_connections = 10;
     for (size_t i = 0; i < size; ++i)
     {
-        Host host;
-        ++host;
         population.push_back(host);
 
-        bool attach = false;
-        while(!attach) {
-            std::uniform_real_distribution<> dis(0, i + 1);
-            unsigned item(dis(gen));
-            double propability(static_cast<double>(population[item]) / (i + 1));
-            //std::cout << "propability " <<  propability << std::endl;
-            attach = Attachment(population[item], propability);
+        for (size_t j = 0; j < connections; ++j) {
+            bool attach = false;
+            while(!attach) {
+                std::uniform_real_distribution<> dis(0, i + connections);
+                unsigned item(dis(gen));
+                double propability(static_cast<double>(population[item]) / successful_connections);
+                //std::cout << "propability " <<  propability << std::endl;
+                attach = Attachment(population[item], propability);
+                if(attach)
+                    ++successful_connections;
+            }
         }
     }
     Histogram histogram(bins, 1, max);
