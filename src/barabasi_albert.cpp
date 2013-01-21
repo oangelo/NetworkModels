@@ -1,4 +1,4 @@
-#include "preferential_attachment.h"
+#include "barabasi_albert.h"
 
 Host::Host(): connections(0) {
 }

@@ -2,7 +2,7 @@
 
 #include <cstdio>
 
-#include "preferential_attachment.h"
+#include "barabasi_albert.h"
 
 int main(int argc, char *argv[])
 {
