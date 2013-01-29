@@ -3,8 +3,8 @@
 
 CC = g++
 CFLAGS = -c -Wall -Weffc++ -pedantic -std=c++0x  
-LDFLAGS = -lgtest -lgsl -lgslcblas -lm -lpthread
-SOURCES =   src/main.cpp src/barabasi_albert.cpp src/statistics/histogram.cpp
+LDFLAGS = -lgsl -lgslcblas -lm -lpthread
+SOURCES =   src/main.cpp src/solicitation_model.cpp src/statistics/histogram.cpp src/statistics/statistics.cpp
  
 OBJECTS = $(SOURCES:.cpp=.o)
 EXECUTABLE = networks
