@@ -1,4 +1,4 @@
-#include "../src/preferential_attachment.h"
+#include "../src/barabasi_albert.h"
 
 TEST(Network, constructor){
     Host host;
@@ -31,5 +31,5 @@ TEST(Network, attachment){
     EXPECT_EQ(connections, 1);
 }
 TEST(Network, preferential_attachment){
-    PreferentialAttachment(100000000);
+//    PreferentialAttachment(100000000);
 }

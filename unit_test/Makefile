@@ -4,7 +4,7 @@
 CC=g++
 CFLAGS=-c -Wall -Weffc++ -pedantic -std=c++0x  
 LDFLAGS= -lgtest -lgsl -lgslcblas -lm -lpthread
-SOURCES=   main.cpp  ../src/preferential_attachment.cpp ../src/statistics/histogram.cpp
+SOURCES=   main.cpp  ../src/barabasi_albert.cpp ../src/statistics/histogram.cpp
  
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=tests
