@@ -1,21 +1,5 @@
 #include "solicitation_model.h"
 
-Host::Host(): connections(0) {
-}
-
-Host& Host::operator++() {
-    ++connections;
-    return *this;
-}
-
-Host::operator unsigned() {
-    return connections;
-}
-
-
-void advertise(){
-
-}
 
 unsigned MaxConnections(std::vector<Host> population){
     unsigned max_connections = 0;
@@ -26,8 +10,8 @@ unsigned MaxConnections(std::vector<Host> population){
 
 }
 
-std::random_device random_dev;
-std::mt19937 generator(random_dev());
+std::random_device random_device;
+std::mt19937 generator(random_device());
 
 std::vector<Host> PreferentialAttachment(unsigned size, unsigned amount_of_advertisers = 40, double advertiser_probability_success = 0.05) {
     Host host;

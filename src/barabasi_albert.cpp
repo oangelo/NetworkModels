@@ -1,37 +1,26 @@
 #include "barabasi_albert.h"
 
-Host::Host(): connections(0) {
-}
-
-Host& Host::operator++() {
-    ++connections;
-    return *this;
-}
-
-Host::operator unsigned() {
-    return connections;
-}
-
-std::random_device rd;
-std::mt19937 gen(rd());
+std::random_device random_dev;
+std::mt19937 randon_generator(random_dev());
 
 bool Attachment(Host& host, double probability) {
     std::uniform_real_distribution<> dis(0, 1);
-    if(dis(gen) < probability){
+    if(dis(randon_generator) < probability){
         ++host;
         return true;
     }
     return false;
 }
 
-std::vector<Host> PreferentialAttachment(unsigned size, unsigned bins, double max) {
+std::vector<Host> PreferentialAttachment(unsigned size) {
     Host host;
     ++host;
+    unsigned initial_population = 0.1 * size;
     unsigned connections = 5;
-    std::vector<Host> population(2 * connections, host);
+    std::vector<Host> population(initial_population, host);
 
     unsigned successful_connections = 10;
-    for (size_t i = 0; i < size; ++i)
+    for (size_t i = 0; i < size - initial_population; ++i)
     {
         population.push_back(host);
 
@@ -39,7 +28,7 @@ std::vector<Host> PreferentialAttachment(unsigned size, unsigned bins, double ma
             bool attach = false;
             while(!attach) {
                 std::uniform_real_distribution<> dis(0, i + connections);
-                unsigned item(dis(gen));
+                unsigned item(dis(randon_generator));
                 double propability(static_cast<double>(population[item]) / successful_connections);
                 //std::cout << "propability " <<  propability << std::endl;
                 attach = Attachment(population[item], propability);
@@ -48,9 +37,7 @@ std::vector<Host> PreferentialAttachment(unsigned size, unsigned bins, double ma
             }
         }
     }
-    Histogram histogram(bins, 1, max);
-    for (size_t i = 0; i < size; ++i)
-        histogram(population[i]);
-    std::cout << histogram << std::endl;
+    for (auto& item: population)
+        std::cout << item << std::endl;
     return population;
 }

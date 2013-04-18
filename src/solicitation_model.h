@@ -5,18 +5,9 @@
 #include <vector>
 #include <random>
 
+#include "network.h" 
 #include "statistics/histogram.h" 
 #include "statistics/statistics.h" 
-
-
-class Host{
-    public:
-        Host();
-        Host& operator++();
-        operator unsigned();
-    private:
-        unsigned connections;
-};
 
 std::vector<Host> PreferentialAttachment(unsigned size, unsigned amount_of_advertisers, double advertiser_probability_success);
 
