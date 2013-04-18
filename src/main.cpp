@@ -20,7 +20,9 @@ int main(int argc, char *argv[])
         if(std::string(argv[i]) == std::string("--barabasi-albert"))
         {
             unsigned size = atoi(argv[i + 1]);
-            PreferentialAttachment(size);
+            unsigned connections = atoi(argv[i + 2]);
+            unsigned init_pop = atoi(argv[i + 3]);
+            PreferentialAttachment(size, connections, init_pop);
         }
     }
     return EXIT_SUCCESS;

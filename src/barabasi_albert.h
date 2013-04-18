@@ -7,7 +7,7 @@
 
 #include "network.h" 
 
-std::vector<Host> PreferentialAttachment(unsigned size);
+std::vector<Host> PreferentialAttachment(unsigned size, unsigned connections, unsigned initial_population);
 bool Attachment(Host& host, double probability); 
 
 #endif /* PREFERENTIAL_ATTACHMENT_H */
