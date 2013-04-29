@@ -5,7 +5,10 @@
 
 #include "gtest/gtest.h"
 
-#include "networks.h"
+//#include "networks.h"
+#include "../src/vertex.h"
+#include "vertex_tes.h"
+#include "edge_tes.h"
 
 int main(int argc, char *argv[])
 {
