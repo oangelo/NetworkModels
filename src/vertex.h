@@ -1,7 +1,7 @@
 #ifndef VERTEX_H
 #define VERTEX_H 
 
-#include <set>
+#include <vector>
 
 #include "edge.h"
 
@@ -13,10 +13,10 @@ class Vertex{
     public:
         Vertex();
         unsigned size() const;
-        void Add(Edge* element);
-        void Remove(Edge* element);
+        void Add(const Edge& element);
+        void Remove(const Edge& element);
     private:
-        std::set<Edge*> edges; 
+        std::vector<Edge> edges; 
 };
 
 #endif /* VERTEX_H */

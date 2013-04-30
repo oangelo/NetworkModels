@@ -1,11 +1,20 @@
 #ifndef NETWORK_H
 #define NETWORK_H 
-class Host{
+
+#include <vector>
+
+#include "vertex.h"
+
+
+class Network{
     public:
-        Host();
-        Host& operator++();
-        operator unsigned();
+        Network(unsigned size);
+        virtual ~Network() = 0;
+
+        const std::vector<Vertex> get_vertexes();
     private:
-        unsigned connections;
+        std::vector<Vertex> vertexes;
+        void CreateEdge(Vertex* v1, Vertex* v2);
 };
+
 #endif /* NETWORK_H */

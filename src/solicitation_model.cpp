@@ -47,11 +47,11 @@ std::vector<Host> PreferentialAttachment(unsigned size, unsigned amount_of_adver
         }
     }
 
-    Histogram histogram(MaxConnections(population), 1, MaxConnections(population));
+    //Histogram histogram(MaxConnections(population), 1, MaxConnections(population));
     for (size_t j = 0; j < size; ++j) {
-        histogram(population[j]);
-        //std::cout << population[i] << std::endl;
+        //histogram(population[j]);
+        std::cout << population[i] << std::endl;
     }
-    std::cout << histogram << std::endl;
+    //std::cout << histogram << std::endl;
     return population;
 }
