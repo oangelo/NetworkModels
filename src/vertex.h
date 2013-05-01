@@ -2,6 +2,7 @@
 #define VERTEX_H 
 
 #include <vector>
+#include <cstddef>
 
 #include "edge.h"
 
@@ -12,10 +13,13 @@ class Edge;
 class Vertex{
     public:
         Vertex();
+        const Edge& operator[](size_t index);
         unsigned size() const;
         void Add(const Edge& element);
         void Remove(const Edge& element);
+        
     private:
+        Vertex& operator=(Vertex&);
         std::vector<Edge> edges; 
 };
 

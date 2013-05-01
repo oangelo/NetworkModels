@@ -2,6 +2,7 @@
 #define ERDOS_RENYI_H 
 
 #include <random>
+#include <iostream>
 
 #include "network.h"
 

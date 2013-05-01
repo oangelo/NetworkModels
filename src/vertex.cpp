@@ -2,6 +2,10 @@
 
 Vertex::Vertex(): edges(){}
 
+const Edge& Vertex::operator[](size_t index){
+    return edges[index];
+}
+
 unsigned Vertex::size() const{
     return edges.size();
 }
