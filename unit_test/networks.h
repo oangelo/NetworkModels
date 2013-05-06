@@ -27,3 +27,8 @@ TEST(erdos_renyi, dot){
     ErdosRenyi network(20,30);
     Graphviz(network, "test.dot");
 }
+
+TEST(erdos_renyi, distribution){
+    ErdosRenyi network(20,30);
+    NodesDistribution(network);
+}

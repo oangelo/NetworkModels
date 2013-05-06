@@ -5,6 +5,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <algorithm>
 #include <map>
 #include <set>
 
@@ -23,7 +24,7 @@ class Network{
         std::vector<Vertex> vertexes;
 };
 
-void NodesDistribuition(Network& neteork);
+void NodesDistribution(Network& neteork);
 void Graphviz(Network& network, std::string file_name);
 
 #endif /* NETWORK_H */

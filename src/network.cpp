@@ -23,8 +23,19 @@ void Network::CreateEdge(Vertex* v1, Vertex* v2) {
 Network::~Network(){}
 
 
-void NodesDistribuition(Network& network){
-    
+void NodesDistribution(Network& network){
+    std::vector<unsigned> edge_amount; 
+    for (size_t i = 0; i < network.size(); ++i) {
+        edge_amount.push_back(network[i].size());
+    }
+    unsigned max(*std::max_element(edge_amount.begin(), edge_amount.end()));
+    std::vector<unsigned> histogram(max, 0); 
+    for (size_t i = 0; i < edge_amount.size(); ++i) {
+        if(edge_amount[i] > 0)
+            ++histogram[edge_amount[i] - 1];
+    }
+    for (size_t i = 0; i < histogram.size(); ++i) 
+        std::cout << histogram[i] << std::endl;
 }
 
 void Graphviz(Network& network, std::string file_name){
