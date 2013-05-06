@@ -7,7 +7,14 @@
 
 #include "network.h" 
 
-std::vector<Host> PreferentialAttachment(unsigned size, unsigned connections, unsigned initial_population);
-bool Attachment(Host& host, double probability); 
+class BarabasiAlbert: public Network{
+    public:
+        BarabasiAlbert(unsigned size, unsigned connections, unsigned initial_population);
+        Vertex* PreferentialAttachment(); 
+    private:
+        std::random_device random_dev;
+        std::mt19937 random_generator;
+};
+
 
 #endif /* PREFERENTIAL_ATTACHMENT_H */

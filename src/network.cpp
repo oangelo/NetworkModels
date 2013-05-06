@@ -15,6 +15,11 @@ const std::vector<Vertex> Network::get_vertexes() {
     return vertexes;
 }
 
+Vertex* Network::NewVertex(){
+    vertexes.push_back(Vertex());
+    return &vertexes[vertexes.size() - 1];
+}
+
 void Network::CreateEdge(Vertex* v1, Vertex* v2) {
     v1->Add(Edge(v1, v2, true));
     v2->Add(Edge(v2, v1, true));

@@ -18,6 +18,7 @@ class Network{
         Vertex& operator[](unsigned index);
         unsigned size() const;
 
+        Vertex* NewVertex();
         void CreateEdge(Vertex* v1, Vertex* v2);
         const std::vector<Vertex> get_vertexes();
     private:

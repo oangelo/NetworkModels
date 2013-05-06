@@ -15,8 +15,7 @@ TEST(erdos_renyi, edges){
     {
         sum += (network[i]).size();
         for (size_t j = 0; j < network[i].size(); ++j){
-            std::cout << &network[i] << std::endl;
-            std::cout << network[i][j].From() << std::endl;
+            EXPECT_EQ(&network[i], network[i][j].From());
         }
     }
     EXPECT_EQ(sum, 6);

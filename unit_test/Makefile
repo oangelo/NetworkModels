@@ -4,7 +4,7 @@
 CC=g++
 CFLAGS=-c -Wall -Weffc++ -pedantic -std=c++0x  
 LDFLAGS= -lgtest -lgsl -lgslcblas -lm -lpthread
-SOURCES=   main.cpp  ../src/vertex.cpp ../src/edge.cpp ../src/erdos-renyi.cpp ../src/network.cpp
+SOURCES=   main.cpp  ../src/vertex.cpp ../src/edge.cpp ../src/erdos-renyi.cpp  ../src/barabasi_albert.cpp ../src/network.cpp
  
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=tests
