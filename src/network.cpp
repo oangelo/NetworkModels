@@ -44,7 +44,7 @@ void NodesDistribution(Network& network){
 }
 
 void Graphviz(Network& network, std::string file_name){
-    typedef std::pair<Vertex*,Vertex*> key;
+    typedef std::pair<const Vertex*, const Vertex*> key;
     std::set<key> set;
     std::ofstream file;
     file.open(file_name);
@@ -52,10 +52,10 @@ void Graphviz(Network& network, std::string file_name){
     file << "graph G {" << std::endl;
     for (size_t i = 0; i < network.size(); ++i) {
         for (size_t j = 0; j < network[i].size(); ++j) {
-            if(set.find(key(network[i][j].From(), network[i][j].To())) == set.end()){
-                file << "\"" << network[i][j].From() << "\"" << " -- " << "\"" << network[i][j].To() << "\""<< std::endl; 
-                set.insert(key(network[i][j].From(), network[i][j].To()));
-                set.insert(key(network[i][j].To(), network[i][j].From()));
+            if(set.find(key(network[i][j], network[i][j])) == set.end()){
+                file << "\"" << network[i](j).From() << "\"" << " -- " << "\"" << network[i](j).To() << "\""<< std::endl; 
+                set.insert(key(network[i](j).From(), network[i](j).To()));
+                set.insert(key(network[i](j).To(), network[i](j).From()));
             }
         }
     }

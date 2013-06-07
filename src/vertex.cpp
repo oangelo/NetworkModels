@@ -2,8 +2,8 @@
 
 Vertex::Vertex(): edges(){}
 
-const Edge& Vertex::operator[](size_t index){
-    return edges[index];
+const Vertex* Vertex::operator[](size_t index){
+    return edges[index].To();
 }
 
 const Edge& Vertex::operator()(size_t index){
