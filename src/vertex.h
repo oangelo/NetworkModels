@@ -14,6 +14,7 @@ class Vertex{
     public:
         Vertex();
         const Edge& operator[](size_t index);
+        const Edge& operator()(size_t index);
         unsigned size() const;
         void Add(const Edge& element);
         void Remove(const Edge& element);

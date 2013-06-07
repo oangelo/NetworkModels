@@ -9,7 +9,7 @@ Some simulations to generate networks
 
 - Network class:
 Every Algorithm that generates a network should inherit from the Network class.
-Every network has vertexes and every vertexes has edges.
+Every network has vertexes and every vertex has edges.
 Network -> vertex -> edges
     - operator[i] -> list of vertex pointed by ith element
 

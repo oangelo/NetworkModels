@@ -47,11 +47,11 @@ TEST(vertex, _operator){
     vert.Add(ed1);
     vert.Add(ed2);
 
-    EXPECT_EQ(vert[0].From(), &vert);
-    EXPECT_EQ(vert[1].From(), &vert);
+    EXPECT_EQ(vert(0).From(), &vert);
+    EXPECT_EQ(vert(1).From(), &vert);
 
-    EXPECT_EQ(vert[0].To(), &to1);
-    EXPECT_EQ(vert[1].To(), &to2);
+    EXPECT_EQ(vert(0).To(), &to1);
+    EXPECT_EQ(vert(1).To(), &to2);
 }
 
 TEST(vertex, copy){
@@ -66,7 +66,7 @@ TEST(vertex, copy){
     vert.Add(ed2);
 
     Vertex copy(vert);
-    EXPECT_EQ(copy[0].To(), &to1);
-    EXPECT_EQ(copy[1].To(), &to2);
+    EXPECT_EQ(copy(0).To(), &to1);
+    EXPECT_EQ(copy(1).To(), &to2);
 }
 #endif /* VERTEX_TES_H */

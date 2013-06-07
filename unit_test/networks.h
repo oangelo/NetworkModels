@@ -15,7 +15,7 @@ TEST(erdos_renyi, edges){
     {
         sum += (network[i]).size();
         for (size_t j = 0; j < network[i].size(); ++j){
-            EXPECT_EQ(&network[i], network[i][j].From());
+            EXPECT_EQ(&network[i], network[i](j).From());
         }
     }
     EXPECT_EQ(sum, 6);
@@ -23,7 +23,7 @@ TEST(erdos_renyi, edges){
 
 
 TEST(erdos_renyi, dot){
-    ErdosRenyi network(20,30);
+    ErdosRenyi network(40,60);
     Graphviz(network, "test.dot");
 }
 
