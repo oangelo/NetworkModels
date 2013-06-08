@@ -24,4 +24,6 @@ class Vertex{
         std::vector<Edge> edges; 
 };
 
+bool operator==(const Vertex& rhs, const Vertex& lhs);
+
 #endif /* VERTEX_H */

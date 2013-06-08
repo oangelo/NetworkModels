@@ -38,3 +38,9 @@ void Vertex::Remove(const Edge& element){
         }
     }
 }
+
+bool operator==(const Vertex& rhs, const Vertex& lhs){
+    if(&rhs == &lhs)
+        return true;
+    return false;
+}

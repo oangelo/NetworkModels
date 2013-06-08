@@ -1,7 +1,6 @@
 #ifndef VERTEX_TES_H
 #define VERTEX_TES_H 
 
-
 TEST(vertex, add){
 
     Vertex to1;
@@ -69,4 +68,13 @@ TEST(vertex, copy){
     EXPECT_EQ(copy(0).To(), &to1);
     EXPECT_EQ(copy(1).To(), &to2);
 }
+
+TEST(vertex, comparison){
+    Vertex v1;
+    Vertex v2;
+
+    EXPECT_TRUE(v1 == v1);
+    EXPECT_FALSE(v1 == v2);
+}
+
 #endif /* VERTEX_TES_H */

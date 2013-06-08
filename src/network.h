@@ -13,16 +13,20 @@
 
 class Network{
     public:
-        Network(unsigned size);
-        virtual ~Network() = 0;
         Vertex& operator[](unsigned index);
         unsigned size() const;
+
+    protected:
+        Network(unsigned size);
+        virtual ~Network() = 0;
 
         Vertex* NewVertex();
         void CreateEdge(Vertex* v1, Vertex* v2);
         const std::vector<Vertex> get_vertexes();
+
     private:
         std::vector<Vertex> vertexes;
+
 };
 
 void NodesDistribution(Network& neteork);
