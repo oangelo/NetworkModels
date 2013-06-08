@@ -14,15 +14,18 @@ unsigned Vertex::size() const{
     return edges.size();
 }
 
-void Vertex::Add(const Edge& element){
-    if(element.From() != this)
-        return;
+bool Vertex::Add(const Edge& element){
+    if(element.From() != this){
+        std::cerr << "Trying to add a edge that is not from this vertex" << std::endl;
+        return false;
+    }
     for(auto edge: edges){
         if(edge.To() == element.To()){
-            return;
+            return false;
         }
     }
     edges.push_back(element);
+    return true;
 }
 
 void Vertex::Remove(const Edge& element){

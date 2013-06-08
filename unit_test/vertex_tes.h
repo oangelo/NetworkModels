@@ -9,6 +9,7 @@ TEST(vertex, add){
     Vertex vert;
     Edge ed1(&vert, &to1);
     Edge ed2(&vert, &to2);
+    Edge ed3(&to1, &to2);
 
     vert.Add(ed1);
     EXPECT_EQ(vert.size(), 1);
@@ -16,6 +17,7 @@ TEST(vertex, add){
     EXPECT_EQ(vert.size(), 2);
     vert.Add(ed2);
     EXPECT_EQ(vert.size(), 2);
+    EXPECT_FALSE(vert.Add(ed3));
 }
 
 TEST(vertex, remove){
@@ -77,4 +79,16 @@ TEST(vertex, comparison){
     EXPECT_FALSE(v1 == v2);
 }
 
+TEST(vertex, repeated_edge){
+    Vertex to1;
+    Vertex to2;
+
+    Vertex vert;
+    Edge ed1(&vert, &to1);
+    Edge ed2(&vert, &to2);
+
+    EXPECT_TRUE(vert.Add(ed1));
+    EXPECT_FALSE(vert.Add(ed1));
+    EXPECT_TRUE(vert.Add(ed2));
+}
 #endif /* VERTEX_TES_H */

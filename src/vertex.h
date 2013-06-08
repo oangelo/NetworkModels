@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <cstddef>
+#include <iostream>
 
 #include "edge.h"
 
@@ -16,7 +17,7 @@ class Vertex{
         const Vertex* operator[](size_t index);
         const Edge& operator()(size_t index);
         unsigned size() const;
-        void Add(const Edge& element);
+        bool Add(const Edge& element);
         void Remove(const Edge& element);
         
     private:
