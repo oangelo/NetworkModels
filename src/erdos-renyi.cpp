@@ -11,7 +11,7 @@ ErdosRenyi::ErdosRenyi(unsigned nodes, unsigned edges)
             random1 = dis(random_gen);
             random2 = dis(random_gen);
         }
-        CreateEdge(&operator[](random1), &operator[](random2));
+        CreateEdge(&((*this)[random1]), &((*this)[random2]));
         random1=random2;
     }
 }

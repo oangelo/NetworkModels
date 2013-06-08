@@ -22,6 +22,7 @@ Those connections are stored inside the class edges.
 - Edge class:
 A class that holds information of which is the owner vector an with which other
 vertex it has a connection.
+This object is need for adding properties to the connection between vertex.
 
 Implemented Networks:
 
