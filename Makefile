@@ -4,7 +4,7 @@
 CC = g++
 CFLAGS = -c -Wall -Weffc++ -pedantic -std=c++0x  
 LDFLAGS = -lgsl -lgslcblas -lm -lpthread
-SOURCES =   src/network.cpp src/barabasi_albert.cpp src/main.cpp src/solicitation_model.cpp src/statistics/histogram.cpp src/statistics/statistics.cpp
+SOURCES=   src/main.cpp  src/vertex.cpp src/edge.cpp src/erdos-renyi.cpp  src/barabasi_albert.cpp src/network.cpp
  
 OBJECTS = $(SOURCES:.cpp=.o)
 EXECUTABLE = networks

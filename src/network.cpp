@@ -40,7 +40,7 @@ void NodesDistribution(Network& network){
             ++histogram[edge_amount[i] - 1];
     }
     for (size_t i = 0; i < histogram.size(); ++i) 
-        std::cout << histogram[i] << std::endl;
+        std::cout << i << " " << histogram[i] << std::endl;
 }
 
 void Graphviz(Network& network, std::string file_name){

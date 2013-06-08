@@ -3,8 +3,7 @@
 
 #include <cstdio>
 
-#include "solicitation_model.h"
-#include "barabasi_albert.h"
+#include "erdos-renyi.h"
 
 int main(int argc, char *argv[])
 {
@@ -15,14 +14,14 @@ int main(int argc, char *argv[])
             unsigned population = atoi(argv[i + 1]);
             unsigned advertisers_amount = atoi(argv[i + 2]);
             double probability_of_success = atof(argv[i + 3]);
-            PreferentialAttachment(population, advertisers_amount, probability_of_success);
+//            PreferentialAttachment(population, advertisers_amount, probability_of_success);
         }
-        if(std::string(argv[i]) == std::string("--barabasi-albert"))
+        if(std::string(argv[i]) == std::string("--erdos-renyi"))
         {
-            unsigned size = atoi(argv[i + 1]);
-            unsigned connections = atoi(argv[i + 2]);
-            unsigned init_pop = atoi(argv[i + 3]);
-            PreferentialAttachment(size, connections, init_pop);
+            unsigned nodes = atoi(argv[i + 1]);
+            unsigned edges = atoi(argv[i + 2]);
+            ErdosRenyi network(nodes, edges);
+            NodesDistribution(network);
         }
     }
     return EXIT_SUCCESS;
