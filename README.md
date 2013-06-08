@@ -6,18 +6,19 @@ Some simulations to generate networks
 ******
 
 #Classes: 
+Network -> vertex -> edges
 
 - Network class:
 Every Algorithm that generates a network should inherit from the Network class.
 Every network has vertexes and every vertex has edges.
-Network -> vertex -> edges
     - operator[i] -> list of vertex pointed by ith element
 
 - Vertex class:
-The vertexes has some connections with other vertexes.
-Those connections are stored inside the class edges.
-    - operator[i] -> ith conected vertex
+The vertexes have connections with other vertexes,
+those connections are stored inside the class edges.
+    - operator[i] -> ith connected vertex
     - operator(i) -> ith edge
+    - vertexes do not accept repeated edges 
 
 - Edge class:
 A class that holds information of which is the owner vector an with which other
