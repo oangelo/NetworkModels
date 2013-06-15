@@ -4,7 +4,7 @@
 #include <cstdio>
 
 #include "erdos-renyi.h"
-#include "barabasi_albert.h"
+#include "barabasi-albert.h"
 
 int main(int argc, char *argv[])
 {

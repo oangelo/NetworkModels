@@ -1,4 +1,4 @@
-#include "barabasi_albert.h"
+#include "barabasi-albert.h"
 #include "statistics/src/statistics.h"
 
 BarabasiAlbert::BarabasiAlbert(unsigned size,  unsigned connections, unsigned initial_population)
