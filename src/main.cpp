@@ -4,6 +4,7 @@
 #include <cstdio>
 
 #include "erdos-renyi.h"
+#include "barabasi_albert.h"
 
 int main(int argc, char *argv[])
 {
@@ -23,6 +24,15 @@ int main(int argc, char *argv[])
             ErdosRenyi network(nodes, edges);
             NodesDistribution(network);
         }
+        if(std::string(argv[i]) == std::string("--barabasi-albert"))
+        {
+            unsigned size = atoi(argv[i + 1]);
+            unsigned connections = atoi(argv[i + 2]);
+            unsigned initial_population = atoi(argv[i + 3]);
+            BarabasiAlbert network(size, connections, initial_population);
+            NodesDistribution(network);
+        }
+
     }
     return EXIT_SUCCESS;
 }
