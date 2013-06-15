@@ -11,6 +11,7 @@ BarabasiAlbert::BarabasiAlbert(unsigned size,  unsigned connections, unsigned in
         CreateEdge(&(*this)[i], &(*this)[i - 1]);
     }
     for (size_t i = 1; i < size - initial_population; ++i) {
+        NewVertex();
         PreferentialAttachment(connections);
     }
 }
@@ -23,7 +24,6 @@ void BarabasiAlbert::PreferentialAttachment(unsigned connections){
     }
     for (size_t j(0); j < connections; ++j) {
         unsigned prefered_vertex(pstatistics::RandomGenerator(value_frequency));
-        NewVertex();
         CreateEdge(&(*this)[this->size() - 1], &(*this)[prefered_vertex]);
     }
 }
