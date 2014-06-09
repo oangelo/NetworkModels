@@ -1,5 +1,5 @@
 #include "barabasi-albert.h"
-#include "statistics/src/statistics.h"
+#include "pstatistics/statistics.h"
 
 BarabasiAlbert::BarabasiAlbert(unsigned size,  unsigned connections, unsigned initial_population)
 :Network(2), random_dev(), random_generator(random_dev())
