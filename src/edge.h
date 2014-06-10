@@ -11,10 +11,14 @@ class Edge{
         Vertex* From() const;
         Vertex* To() const;
         bool IsBidirectional() const;
+
+        void SetMark(int i);
+        int GetMark() const;
     private:
         Vertex* from;
         Vertex* to;
         bool bidirectional;
+        int mark;
 };
 
 #endif /* EDGE_H */

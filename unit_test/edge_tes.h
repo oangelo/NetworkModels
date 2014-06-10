@@ -19,4 +19,13 @@ TEST(edge, copy){
     EXPECT_EQ(&to, edge.To());
 }
 
+TEST(edge, mark){
+    Vertex from; 
+    Vertex to; 
+    Edge edge(&from, &to);
+    EXPECT_EQ(edge.GetMark(), 0);
+    edge.SetMark(-4);
+    EXPECT_EQ(edge.GetMark(), -4);
+}
+
 #endif /* EDGE_TES_H */
