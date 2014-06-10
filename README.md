@@ -33,3 +33,7 @@ To be implemented:
 
 [Barabási–Albert](http://en.wikipedia.org/wiki/Barabasi-Albert_model)
 
+#How to use:
+
+- Link the lib with: -lnetmodels
+- The headers are under the folder network_models/

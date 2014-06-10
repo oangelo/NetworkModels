@@ -5,6 +5,8 @@
 #include <vector>
 #include <random>
 
+#include <pstatistics/statistics.h>
+
 #include "network.h" 
 
 class BarabasiAlbert: public Network{
