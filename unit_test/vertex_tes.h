@@ -91,4 +91,12 @@ TEST(vertex, repeated_edge){
     EXPECT_FALSE(vert.Add(ed1));
     EXPECT_TRUE(vert.Add(ed2));
 }
+
+TEST(vertex, mark){
+    Vertex v1;
+
+    EXPECT_EQ(v1.GetMark(), 0);
+    v1.SetMark(-2);
+    EXPECT_EQ(v1.GetMark(), -2);
+}
 #endif /* VERTEX_TES_H */

@@ -1,6 +1,6 @@
 #include "vertex.h"
 
-Vertex::Vertex(): edges(){}
+Vertex::Vertex(): edges(), mark(0){}
 
 const Vertex* Vertex::operator[](size_t index){
     return edges[index].To();
@@ -40,6 +40,15 @@ void Vertex::Remove(const Edge& element){
             edges.erase(i);
         }
     }
+}
+
+
+void Vertex::SetMark(int i){
+    mark = i;
+}
+
+int Vertex::GetMark() const{
+    return(mark);
 }
 
 bool operator==(const Vertex& rhs, const Vertex& lhs){

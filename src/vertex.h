@@ -14,15 +14,22 @@ class Edge;
 class Vertex{
     public:
         Vertex();
+
         const Vertex* operator[](size_t index);
         const Edge& operator()(size_t index);
+        
         unsigned size() const;
+
         bool Add(const Edge& element);
         void Remove(const Edge& element);
+
+        void SetMark(int i);
+        int GetMark() const;
         
     private:
         Vertex& operator=(Vertex&);
         std::vector<Edge> edges; 
+        int mark;
 };
 
 bool operator==(const Vertex& rhs, const Vertex& lhs);
