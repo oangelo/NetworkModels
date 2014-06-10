@@ -29,7 +29,9 @@ class Network{
 
 };
 
-void NodesDistribution(Network& neteork);
+typedef std::pair<unsigned, unsigned> bin;
+std::vector<bin> NodesDistribution(Network& neteork);
+
 void Graphviz(Network& network, std::string file_name);
 
 #endif /* NETWORK_H */

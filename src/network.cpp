@@ -28,8 +28,9 @@ void Network::CreateEdge(Vertex* v1, Vertex* v2) {
 Network::~Network(){}
 
 
-void NodesDistribution(Network& network){
+std::vector<bin> NodesDistribution(Network& network){
     std::vector<unsigned> edge_amount; 
+    std::vector<bin> result;
     for (size_t i = 0; i < network.size(); ++i) {
         edge_amount.push_back(network[i].size());
     }
@@ -40,7 +41,8 @@ void NodesDistribution(Network& network){
             ++histogram[edge_amount[i] - 1];
     }
     for (size_t i = 0; i < histogram.size(); ++i) 
-        std::cout << i + 1 << " " << histogram[i] << std::endl;
+        result.push_back(bin(i+1, histogram[i]));
+    return(result);
 }
 
 void Graphviz(Network& network, std::string file_name){
