@@ -11,7 +11,7 @@ Network -> vertex -> edges
 - Network class:
 Every Algorithm that generates a network should inherit from the Network class.
 Every network has vertexes and every vertex has edges.
-    - operator[i] -> list of vertex pointed by ith element
+    - operator[i] -> Return the ith Vertex 
 
 - Vertex class:
 The vertexes have connections with other vertexes,
@@ -29,9 +29,9 @@ Implemented Networks:
 
 [Erdős–Rényi](http://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93R%C3%A9nyi_model)
 
-To be implemented:
-
 [Barabási–Albert](http://en.wikipedia.org/wiki/Barabasi-Albert_model)
+
+[Square-Lattice](http://en.wikipedia.org/wiki/Lattice_graph)
 
 #How to use:
 
