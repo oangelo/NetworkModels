@@ -1,4 +1,4 @@
-#include "../src/erdos-renyi.h"
+#include "network_models/erdos-renyi.h"
 
 class NetworkTest: public Network{
 };

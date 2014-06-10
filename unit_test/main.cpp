@@ -6,9 +6,9 @@
 #include "gtest/gtest.h"
 
 #include "networks.h"
-#include "../src/vertex.h"
-#include "../src/network.h"
-#include "../src/erdos-renyi.h"
+#include "network_models/vertex.h"
+#include "network_models/network.h"
+#include "network_models/erdos-renyi.h"
 #include "vertex_tes.h"
 #include "edge_tes.h"
 
