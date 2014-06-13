@@ -18,3 +18,10 @@ bool Edge::IsBidirectional() const{
 
 void Edge::SetMark(int i){ mark = i; }
 int Edge::GetMark() const{ return(mark); }
+
+bool operator==(const Edge& rhs, const Edge& lhs){
+    if(rhs.To() == lhs.To() and rhs.From() == lhs.From())
+        return true;
+    else
+        return false;
+}

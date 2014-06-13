@@ -71,6 +71,24 @@ TEST(vertex, copy){
     EXPECT_EQ(copy(1).To(), &to2);
 }
 
+TEST(vertex, find){
+    Vertex to1;
+    Vertex to2;
+    Vertex to3;
+
+    Vertex vert;
+    Edge ed1(&vert, &to1);
+    Edge ed2(&vert, &to2);
+    Edge ed3(&vert, &to3);
+
+    vert.Add(ed1);
+    vert.Add(ed2);
+
+    EXPECT_EQ(*vert.Find(&to1), ed1);
+    Edge* e(NULL);
+    EXPECT_EQ(vert.Find(&to3), e);
+}
+
 TEST(vertex, comparison){
     Vertex v1;
     Vertex v2;

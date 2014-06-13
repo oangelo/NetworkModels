@@ -6,8 +6,16 @@ const Vertex* Vertex::operator[](size_t index){
     return edges[index].To();
 }
 
-const Edge& Vertex::operator()(size_t index){
+Edge& Vertex::operator()(size_t index){
     return edges[index];
+}
+
+Edge* Vertex::Find(Vertex* vertex){
+    Edge* result(NULL);
+    for(size_t i(0); i < edges.size(); ++i)
+        if(edges[i].To() == vertex)
+            result = &edges[i];
+    return result;
 }
 
 unsigned Vertex::size() const{
@@ -16,7 +24,7 @@ unsigned Vertex::size() const{
 
 bool Vertex::Add(const Edge& element){
     if(element.From() != this){
-        std::cerr << "Trying to add a edge that is not from this vertex" << std::endl;
+        std::cerr << "Trying to add an edge that is not from this vertex" << std::endl;
         return false;
     }
     for(auto edge: edges){

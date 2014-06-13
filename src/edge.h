@@ -21,4 +21,7 @@ class Edge{
         int mark;
 };
 
+
+bool operator==(const Edge& rhs, const Edge& lhs);
+
 #endif /* EDGE_H */

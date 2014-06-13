@@ -16,7 +16,9 @@ class Vertex{
         Vertex();
 
         const Vertex* operator[](size_t index);
-        const Edge& operator()(size_t index);
+        Edge& operator()(size_t index);
+
+        Edge* Find(Vertex* vertex);
         
         unsigned size() const;
 
