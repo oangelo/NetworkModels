@@ -66,3 +66,24 @@ void Graphviz(Network& network, std::string file_name){
 
     file.close();
 }
+
+std::set<Vertex*> Burn(Vertex* vertex){
+    bool has_neighbors = true;
+    std::set<Vertex*> cluster;
+    std::vector<Vertex*> to_search;
+    to_search.push_back(vertex);
+    int mark = vertex->GetMark();
+    while(has_neighbors){
+        cluster.insert(to_search[to_search.size() - 1]);
+        Vertex& fire(*to_search[to_search.size() - 1]);
+        to_search.pop_back();
+        for(size_t i(0); i < fire.size(); ++i){
+            if(fire[i].GetMark() == mark && (cluster.find(&fire[i]) == cluster.end())){
+                to_search.push_back(&fire[i]);
+            }
+        }
+        if(to_search.size() == 0)
+            has_neighbors = false;
+    }
+    return cluster;
+}

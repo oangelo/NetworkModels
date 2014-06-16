@@ -34,4 +34,8 @@ std::vector<bin> NodesDistribution(Network& neteork);
 
 void Graphviz(Network& network, std::string file_name);
 
+//Burn for Mark
+
+std::set<Vertex*> Burn(Vertex* vertex);
+
 #endif /* NETWORK_H */

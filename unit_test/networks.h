@@ -53,3 +53,18 @@ TEST(Square, distribution){
             EXPECT_EQ(i.second,nodes -(4*sqrt(nodes)-4));
     }
 }
+
+TEST(Square, Burn){
+    unsigned nodes = 9;
+    Square network(nodes);
+    network[0].SetMark(1);
+    network[0][0].SetMark(1);
+    network[0][1].SetMark(1);
+    network[8].SetMark(2);
+    network[8][0].SetMark(2);
+    network[8][1].SetMark(2);
+    std::set<Vertex*> cluster1(Burn(&network[0]));
+    std::set<Vertex*> cluster2(Burn(&network[8]));
+    EXPECT_TRUE(cluster1.size() <= 3);
+    EXPECT_TRUE(cluster2.size() <= 3);
+}
