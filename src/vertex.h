@@ -15,7 +15,7 @@ class Vertex{
     public:
         Vertex();
 
-        const Vertex* operator[](size_t index);
+        Vertex& operator[](size_t index);
         Edge& operator()(size_t index);
 
         Edge* Find(Vertex* vertex);
