@@ -57,14 +57,30 @@ TEST(Square, distribution){
 TEST(Square, Burn){
     unsigned nodes = 9;
     Square network(nodes);
+    std::set<Vertex*> cluster0(Burn(&network[0]));
+    EXPECT_EQ(cluster0.size(), 9);
     network[0].SetMark(1);
     network[0][0].SetMark(1);
     network[0][1].SetMark(1);
+    std::set<Vertex*> cluster1(Burn(&network[0]));
+    EXPECT_EQ(cluster1.size(), 3);
     network[8].SetMark(2);
     network[8][0].SetMark(2);
     network[8][1].SetMark(2);
-    std::set<Vertex*> cluster1(Burn(&network[0]));
     std::set<Vertex*> cluster2(Burn(&network[8]));
-    EXPECT_TRUE(cluster1.size() <= 3);
     EXPECT_TRUE(cluster2.size() <= 3);
+}
+
+
+TEST(Square, Clusters){
+    unsigned nodes = 9;
+    Square network(nodes);
+    network[0].SetMark(1);
+    network[0][0].SetMark(1);
+    network[0][1].SetMark(1);
+    network[7].SetMark(2);
+    network[7][0].SetMark(2);
+    network[7][1].SetMark(2);
+    std::vector<unsigned> clusters(Clusters(network));
+    EXPECT_EQ(clusters.size(), 3);
 }

@@ -87,3 +87,18 @@ std::set<Vertex*> Burn(Vertex* vertex){
     }
     return cluster;
 }
+
+
+std::vector<unsigned> Clusters(Network& network){
+    std::vector<unsigned> size;
+    std::set<Vertex*> burnt; 
+    for(size_t i(0); i < network.size(); ++i){ 
+        if(burnt.find(&network[i]) == burnt.end()){
+            std::set<Vertex*> cluster(Burn(&network[i])); 
+            size.push_back(cluster.size());
+            burnt.insert(cluster.begin(), cluster.end());
+        }
+    }
+    return(size);
+
+}
