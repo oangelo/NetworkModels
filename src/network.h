@@ -37,6 +37,6 @@ void Graphviz(Network& network, std::string file_name);
 //Burn for Mark
 
 std::set<Vertex*> Burn(Vertex* vertex);
-std::vector<unsigned> Clusters(Network& network);
+std::map<int,std::vector<unsigned>> Clusters(Network& network);
 
 #endif /* NETWORK_H */

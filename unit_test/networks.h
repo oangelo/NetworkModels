@@ -81,6 +81,7 @@ TEST(Square, Clusters){
     network[7].SetMark(2);
     network[7][0].SetMark(2);
     network[7][1].SetMark(2);
-    std::vector<unsigned> clusters(Clusters(network));
-    EXPECT_EQ(clusters.size(), 3);
+    std::map<int, std::vector<unsigned>> clusters(Clusters(network));
+    EXPECT_EQ(clusters[1][0], 3);
+    EXPECT_EQ(clusters[2][0], 3);
 }

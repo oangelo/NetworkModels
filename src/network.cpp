@@ -89,13 +89,23 @@ std::set<Vertex*> Burn(Vertex* vertex){
 }
 
 
-std::vector<unsigned> Clusters(Network& network){
-    std::vector<unsigned> size;
+std::map<int,std::vector<unsigned>> Clusters(Network& network){
+    std::map<int, std::vector<unsigned>> size; 
     std::set<Vertex*> burnt; 
+
+    std::set<int> mark_set;
+    for(size_t i(0); i < network.size(); ++i){ 
+        mark_set.insert(network[i].GetMark());
+    }
+    for(int i: mark_set){
+        std::vector<unsigned> aux;
+        size.insert(std::pair<int, std::vector<unsigned>>(i, aux));
+    }
+
     for(size_t i(0); i < network.size(); ++i){ 
         if(burnt.find(&network[i]) == burnt.end()){
             std::set<Vertex*> cluster(Burn(&network[i])); 
-            size.push_back(cluster.size());
+            size[network[i].GetMark()].push_back(cluster.size());
             burnt.insert(cluster.begin(), cluster.end());
         }
     }
