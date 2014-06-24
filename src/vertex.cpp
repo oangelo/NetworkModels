@@ -33,7 +33,7 @@ bool Vertex::Add(const Edge& element){
         }
     }
     edges.push_back(element);
-    element.To()->AddIncoming(this, &edges[edges.size() - 1]);
+    element.To()->AddIncoming(this, &edges.back());
     return true;
 }
 
