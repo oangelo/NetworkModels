@@ -1,6 +1,6 @@
 #include "vertex.h"
 
-Vertex::Vertex(): edges(), mark(0){}
+Vertex::Vertex(): edges(), mark(0), incoming() {}
 
 Vertex& Vertex::operator[](size_t index){
     return *edges[index].To();
@@ -10,11 +10,11 @@ Edge& Vertex::operator()(size_t index){
     return edges[index];
 }
 
-Edge* Vertex::Find(Vertex* vertex){
+Edge* Vertex::FindIncoming(Vertex* vertex){
     Edge* result(NULL);
-    for(size_t i(0); i < edges.size(); ++i)
-        if(edges[i].To() == vertex)
-            result = &edges[i];
+    auto search = incoming.find(vertex);
+    if(search != incoming.end()) 
+        result = (*search).second;
     return result;
 }
 
@@ -33,7 +33,13 @@ bool Vertex::Add(const Edge& element){
         }
     }
     edges.push_back(element);
+    for(Edge& edge: edges)
+        edge.To()->AddIncoming(this, &edge);
     return true;
+}
+
+void Vertex::AddIncoming(Vertex* vertex, Edge* edge){
+     incoming[vertex] = edge;
 }
 
 void Vertex::Remove(const Edge& element){

@@ -84,9 +84,11 @@ TEST(vertex, find){
     vert.Add(ed1);
     vert.Add(ed2);
 
-    EXPECT_EQ(*vert.Find(&to1), ed1);
+    EXPECT_EQ(to1.FindIncoming(&vert), &(vert(0)));
+    EXPECT_EQ(to2.FindIncoming(&vert), &(vert(1)));
     Edge* e(NULL);
-    EXPECT_EQ(vert.Find(&to3), e);
+    EXPECT_EQ(to3.FindIncoming(&vert), e);
+    EXPECT_EQ(vert.FindIncoming(&to3), e);
 }
 
 TEST(vertex, comparison){
