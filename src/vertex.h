@@ -2,6 +2,7 @@
 #define VERTEX_H 
 
 #include <vector>
+#include <deque>
 #include <cstddef>
 #include <iostream>
 #include <map>
@@ -33,7 +34,7 @@ class Vertex{
         
     private:
         Vertex& operator=(Vertex&);
-        std::vector<Edge> edges; 
+        std::deque<Edge> edges; 
         int mark;
         std::map<Vertex*,Edge*> incoming;
 };
