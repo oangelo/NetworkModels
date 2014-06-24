@@ -1,6 +1,6 @@
 #include "network_models/erdos-renyi.h"
 #include "network_models/square.h"
-#include "network_models/mean_field.h"
+#include "network_models/mean-field.h"
 
 class NetworkTest: public Network{
 };

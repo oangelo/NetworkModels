@@ -1,4 +1,4 @@
-#include "mean_field.h"
+#include "mean-field.h"
 
 MeanField::MeanField(unsigned nodes)
 :Network(nodes)
