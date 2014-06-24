@@ -1,5 +1,6 @@
 #include "network_models/erdos-renyi.h"
 #include "network_models/square.h"
+#include "network_models/mean_field.h"
 
 class NetworkTest: public Network{
 };
@@ -84,4 +85,12 @@ TEST(Square, Clusters){
     std::map<int, std::vector<unsigned>> clusters(Clusters(network));
     EXPECT_EQ(clusters[1][0], 3);
     EXPECT_EQ(clusters[2][0], 3);
+}
+
+TEST(MeanField, Nodes){
+    unsigned nodes = 9;
+    MeanField network(nodes);
+    for(size_t i(0); i < network.size(); ++i){
+        EXPECT_EQ(network[i].size() + 1, network.size()); 
+    }
 }
