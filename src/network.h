@@ -26,6 +26,9 @@ class Network{
 
     private:
         std::vector<Vertex> vertexes;
+        //the Network class should never be copied!
+        Network& operator=(const Network& network);
+        Network(const Network& network);
 
 };
 
