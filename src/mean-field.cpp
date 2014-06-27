@@ -1,7 +1,7 @@
 #include "mean-field.h"
 
 MeanField::MeanField(unsigned nodes)
-:Network(nodes)
+:Network(nodes, "mean-field")
 {
     Network& network(*this);
     for(size_t i = 0; i < nodes; ++i){

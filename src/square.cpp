@@ -1,7 +1,7 @@
 #include "square.h"
 
 Square::Square(unsigned nodes)
-:Network(nodes)
+:Network(nodes, "square")
 {
     unsigned m(sqrt(nodes));
     for (size_t i = 0; i < nodes; ++i)

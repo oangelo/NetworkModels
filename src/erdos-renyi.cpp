@@ -1,7 +1,7 @@
 #include "erdos-renyi.h"
 
 ErdosRenyi::ErdosRenyi(unsigned nodes, unsigned edges)
-:Network(nodes), random_device(), random_gen(random_device()) 
+:Network(nodes, "erdos-renyi"), random_device(), random_gen(random_device()) 
 {
     std::uniform_int_distribution<> dis(0, nodes - 1);
     unsigned random1(0), random2(0);

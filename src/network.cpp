@@ -1,7 +1,7 @@
 #include "network.h"
 
-Network::Network(unsigned size)
-:vertexes(size){}
+Network::Network(unsigned size, std::string model_name)
+:vertexes(size), model_name(model_name){}
 
 unsigned Network::size() const{
     return vertexes.size();
@@ -23,6 +23,10 @@ Vertex* Network::NewVertex(){
 void Network::CreateEdge(Vertex* v1, Vertex* v2) {
     v1->Add(Edge(v1, v2, true));
     v2->Add(Edge(v2, v1, true));
+}
+
+std::string Network::GetModelName(){
+    return model_name;
 }
 
 Network::~Network(){}

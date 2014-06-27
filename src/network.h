@@ -5,6 +5,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <string>
 #include <algorithm>
 #include <map>
 #include <set>
@@ -15,9 +16,10 @@ class Network{
     public:
         Vertex& operator[](unsigned index);
         unsigned size() const;
+        std::string GetModelName();
 
     protected:
-        Network(unsigned size);
+        Network(unsigned size, std::string model_name);
         virtual ~Network() = 0;
 
         Vertex* NewVertex();
@@ -26,6 +28,7 @@ class Network{
 
     private:
         std::vector<Vertex> vertexes;
+        std::string model_name;
         //the Network class should never be copied!
         Network& operator=(const Network& network);
         Network(const Network& network);
