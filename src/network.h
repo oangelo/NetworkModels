@@ -17,6 +17,7 @@ class Network{
         Vertex& operator[](unsigned index);
         unsigned size() const;
         std::string GetModelName();
+        double GetMeanConnectivity();
 
     protected:
         Network(unsigned size, std::string model_name);
@@ -32,7 +33,6 @@ class Network{
         //the Network class should never be copied!
         Network& operator=(const Network& network);
         Network(const Network& network);
-
 };
 
 typedef std::pair<unsigned, unsigned> bin;

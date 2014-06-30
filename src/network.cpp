@@ -29,6 +29,14 @@ std::string Network::GetModelName(){
     return model_name;
 }
 
+
+double Network::GetMeanConnectivity(){
+    unsigned sum(0);
+    for(Vertex& v: vertexes)
+        sum += v.size();
+    return static_cast<double>(sum) / vertexes.size();
+}
+
 Network::~Network(){}
 
 

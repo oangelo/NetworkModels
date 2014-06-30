@@ -34,6 +34,12 @@ TEST(erdos_renyi, distribution){
     NodesDistribution(network);
 }
 
+TEST(erdos_renyi, MeanConnectivety){
+    ErdosRenyi network(40,80);
+    EXPECT_NEAR(network.GetMeanConnectivity(), 4, 0.5);
+}
+
+
 TEST(Square, dot){
     Square network(9);
     Graphviz(network, "square.dot");
