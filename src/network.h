@@ -18,10 +18,10 @@ class Network{
         unsigned size() const;
         std::string GetModelName();
         double GetMeanConnectivity();
+        virtual ~Network() = 0;
 
     protected:
         Network(unsigned size, std::string model_name);
-        virtual ~Network() = 0;
 
         Vertex* NewVertex();
         void CreateEdge(Vertex* v1, Vertex* v2);
