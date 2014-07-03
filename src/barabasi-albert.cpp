@@ -1,7 +1,7 @@
 #include "barabasi-albert.h"
 
 BarabasiAlbert::BarabasiAlbert(unsigned size,  unsigned connections, unsigned initial_population)
-:Network(0, "barabasi-albert"), random_dev(), random_generator(random_dev())
+:Network(0, "barabasi-albert"), random_dev(), random_generator(random_dev()), frequency()
 {
     //init the network
     Network& network(*this);
@@ -9,6 +9,8 @@ BarabasiAlbert::BarabasiAlbert(unsigned size,  unsigned connections, unsigned in
     for (size_t i = 0; i < initial_population - 2; ++i) {
         Vertex *new_vertex(NewVertex());
         this->CreateEdge(aux_vertex, new_vertex);
+        frequency.push_back(aux_vertex); 
+        frequency.push_back(new_vertex); 
         aux_vertex = new_vertex;
     }
     for (size_t i = 0; i < size - initial_population; ++i) {
@@ -18,16 +20,12 @@ BarabasiAlbert::BarabasiAlbert(unsigned size,  unsigned connections, unsigned in
 }
 
 void BarabasiAlbert::PreferentialAttachment(unsigned connections, Vertex& vertex){
-    std::vector<Vertex*> frequency;
     Network& network(*this);
-    for (size_t j(0); j < network.size(); ++j) {
-      if(&network[j] != &vertex)
-        for (size_t i(0); i < network[j].size(); ++i) 
-          frequency.push_back(&network[j]); 
-    }
     std::uniform_real_distribution<> dist(0, frequency.size() - 1);
     for (size_t j(0); j < connections; ++j) {
         Vertex* prefered_vertex(frequency[dist(random_generator)]);
         this->CreateEdge(prefered_vertex, &vertex);
+        frequency.push_back(prefered_vertex); 
+        frequency.push_back(&vertex); 
     }
 }

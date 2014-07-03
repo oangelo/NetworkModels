@@ -36,8 +36,10 @@ TEST(erdos_renyi, distribution){
 }
 
 TEST(BarabasiAlbert, distribution){
-    BarabasiAlbert network(100, 1, 5);
-    NodesDistribution(network);
+    BarabasiAlbert network(10000, 1, 5);
+    auto hist(NodesDistribution(network));
+    for(auto i: hist)
+      std::cout << i.first << " " << i.second << std::endl;
 }
 
 TEST(erdos_renyi, MeanConnectivety){

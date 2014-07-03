@@ -14,6 +14,7 @@ class BarabasiAlbert: public Network{
         std::random_device random_dev;
         std::mt19937 random_generator;
         void PreferentialAttachment(unsigned connections, Vertex& vertex);
+        std::vector<Vertex*> frequency;
 };
 
 #endif /* BARABASI_ALBERT_H */
