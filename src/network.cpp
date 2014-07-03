@@ -11,13 +11,13 @@ Vertex& Network::operator[](unsigned index){
     return vertexes[index];
 }
 
-const std::vector<Vertex> Network::get_vertexes() {
+const std::deque<Vertex> Network::get_vertexes() {
     return vertexes;
 }
 
 Vertex* Network::NewVertex(){
     vertexes.push_back(Vertex());
-    return &vertexes[vertexes.size() - 1];
+    return (&vertexes.back());
 }
 
 void Network::CreateEdge(Vertex* v1, Vertex* v2) {

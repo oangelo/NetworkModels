@@ -1,3 +1,4 @@
+#include "network_models/barabasi-albert.h"
 #include "network_models/erdos-renyi.h"
 #include "network_models/square.h"
 #include "network_models/mean-field.h"
@@ -31,6 +32,11 @@ TEST(erdos_renyi, dot){
 
 TEST(erdos_renyi, distribution){
     ErdosRenyi network(20,30);
+    NodesDistribution(network);
+}
+
+TEST(BarabasiAlbert, distribution){
+    BarabasiAlbert network(100, 1, 5);
     NodesDistribution(network);
 }
 

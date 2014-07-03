@@ -4,7 +4,7 @@ CC := g++
 SRCDIR := src
 BUILDDIR := build
 CFLAGS := -g -Wall -std=c++0x  -Weffc++ -Wextra -pedantic
-LDFLAGS=  -lm -lpstatistics 
+LDFLAGS=  -lm
 TARGET := netmodels 
 LIB := libnetmodels.so 
 SRCEXT := cpp

@@ -5,6 +5,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <deque>
 #include <string>
 #include <algorithm>
 #include <map>
@@ -25,10 +26,10 @@ class Network{
 
         Vertex* NewVertex();
         void CreateEdge(Vertex* v1, Vertex* v2);
-        const std::vector<Vertex> get_vertexes();
+        const std::deque<Vertex> get_vertexes();
 
     private:
-        std::vector<Vertex> vertexes;
+        std::deque<Vertex> vertexes;
         std::string model_name;
         //the Network class should never be copied!
         Network& operator=(const Network& network);

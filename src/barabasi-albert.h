@@ -1,11 +1,9 @@
-#ifndef PREFERENTIAL_ATTACHMENT_H
-#define PREFERENTIAL_ATTACHMENT_H 
+#ifndef BARABASI_ALBERT_H
+#define BARABASI_ALBERT_H
 
 #include <iostream>
 #include <vector>
 #include <random>
-
-#include <pstatistics/statistics.h>
 
 #include "network.h" 
 
@@ -15,7 +13,7 @@ class BarabasiAlbert: public Network{
     private:
         std::random_device random_dev;
         std::mt19937 random_generator;
-        void PreferentialAttachment(unsigned connections);
+        void PreferentialAttachment(unsigned connections, Vertex& vertex);
 };
 
-#endif /* PREFERENTIAL_ATTACHMENT_H */
+#endif /* BARABASI_ALBERT_H */
