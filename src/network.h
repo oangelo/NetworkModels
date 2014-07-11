@@ -34,6 +34,7 @@ class Network{
         std::deque<Vertex> vertexes;
         std::string model_name;
 
+        //k-shell algorithm (ref arXiv:cs/0310049v1)
         typedef std::unordered_map<Vertex*, unsigned> shell_map;
         shell_map kshell;
         void BuildKshell();
