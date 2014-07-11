@@ -38,8 +38,8 @@ TEST(erdos_renyi, distribution){
 TEST(BarabasiAlbert, distribution){
     BarabasiAlbert network(10000, 1, 5);
     auto hist(NodesDistribution(network));
-    for(auto i: hist)
-      std::cout << i.first << " " << i.second << std::endl;
+//    for(auto i: hist)
+//      std::cout << i.first << " " << i.second << std::endl;
 }
 
 TEST(erdos_renyi, MeanConnectivety){
@@ -108,3 +108,34 @@ TEST(MeanField, Nodes){
         EXPECT_EQ(network[i].size() + 1, network.size()); 
     }
 }
+
+//the k shell of a square network is 2 for all nodes
+TEST(kshell, Square){
+    unsigned nodes = 100;
+    Square network(nodes);
+    for(size_t i(0); i < network.size(); ++i){
+      unsigned rank(network.GetKshellVertexes(&network[i]));
+      EXPECT_EQ(rank, 2);
+    }
+}
+
+TEST(kshell, SimpleNet){
+  class NetTest: public Network{
+    public:
+    NetTest():Network(5, "test"){
+      Network& network(*this);
+      CreateEdge(&network[1], &network[2]);  
+      CreateEdge(&network[2], &network[4]);  
+      CreateEdge(&network[3], &network[4]);  
+      CreateEdge(&network[3], &network[1]);  
+      CreateEdge(&network[0], &network[1]);  
+    };
+  } network;
+    
+  EXPECT_EQ(network.GetKshellVertexes(&network[0]), 1);
+  EXPECT_EQ(network.GetKshellVertexes(&network[1]), 2);
+  EXPECT_EQ(network.GetKshellVertexes(&network[2]), 2);
+  EXPECT_EQ(network.GetKshellVertexes(&network[3]), 2);
+  EXPECT_EQ(network.GetKshellVertexes(&network[4]), 2);
+}
+

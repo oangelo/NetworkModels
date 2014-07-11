@@ -1,7 +1,7 @@
 #include "network.h"
 
 Network::Network(unsigned size, std::string model_name)
-:vertexes(size), model_name(model_name){}
+:vertexes(size), model_name(model_name), kshell(){}
 
 unsigned Network::size() const{
     return vertexes.size();
@@ -123,4 +123,78 @@ std::map<int,std::vector<unsigned>> Clusters(Network& network){
     }
     return(size);
 
+}
+
+struct Comp 
+{
+    Comp(Vertex* v) : v(v) { }
+
+    bool operator () (std::pair<Vertex*, unsigned>& p)
+    {
+        return (p.first == v);
+    }
+    Vertex* v;
+};
+
+void Decrement(Vertex* vertex, std::vector<std::pair<Vertex*, unsigned>> &core){
+  std::vector<std::pair<Vertex*, unsigned>>::iterator it;
+  Vertex& v(*vertex);
+  for(size_t k(0); k < v.size(); ++k){
+    it = std::find_if(core.begin(), core.end(), Comp(&(v[k])));
+    if(it != core.end()){
+      --(it->second);
+    }
+  }
+}
+
+void Network::BuildKshell(){
+//  for(auto& i: vertexes){
+//      std::cout <<  &i;
+//      for(size_t j(0); j < i.size(); ++j)
+//        std::cout << " " << &i[j];
+//      std::cout << std::endl;
+//  }
+  typedef std::pair<Vertex*, unsigned> bin;
+  std::vector<bin> core;
+  //building the core
+  for(std::deque<Vertex>::iterator it(vertexes.begin());
+      it != vertexes.end(); ++it){
+    core.push_back(bin(&(*it), it->size()));
+  }
+  std::sort(core.begin(), core.end(), [] (bin a, bin b)
+      {return a.second < b.second;});
+
+//  for(std::vector<bin>::iterator it(core.begin());
+//      it != core.end(); ++it){
+//    std::cout << it->first << " " << it->second << std::endl;
+//  }
+
+  //get the vertex within the shell
+  unsigned shell(core.begin()->second);
+  std::vector<Vertex*> on_the_shell;
+  typedef std::vector<bin>::iterator core_it;  
+  while(core.size() > 0){
+    core_it it(core.begin());
+    while(it->second <= shell && it != core.end()){
+      kshell[it->first] = shell;
+      Decrement(it->first, core);
+      core.erase(it);
+      std::sort(core.begin(), core.end(), [] (bin a, bin b)
+          {return a.second < b.second;});
+      it = core.begin();
+//      std::cout << std::endl;
+//          for(std::vector<bin>::iterator it(core.begin());
+//              it != core.end(); ++it){
+//            std::cout << it->first << " " << it->second << std::endl;
+//          }
+    }
+    ++shell;
+  }
+}
+
+unsigned Network::GetKshellVertexes(Vertex* target){
+  if(kshell.size() == 0){
+    BuildKshell();
+  } 
+  return kshell[target];
 }

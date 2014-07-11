@@ -9,6 +9,7 @@
 #include <string>
 #include <algorithm>
 #include <map>
+#include <unordered_map>
 #include <set>
 
 #include "vertex.h"
@@ -19,6 +20,7 @@ class Network{
         unsigned size() const;
         std::string GetModelName();
         double GetMeanConnectivity();
+        unsigned GetKshellVertexes(Vertex* target);
         virtual ~Network() = 0;
 
     protected:
@@ -31,6 +33,10 @@ class Network{
     private:
         std::deque<Vertex> vertexes;
         std::string model_name;
+
+        typedef std::unordered_map<Vertex*, unsigned> shell_map;
+        shell_map kshell;
+        void BuildKshell();
         //the Network class should never be copied!
         Network& operator=(const Network& network);
         Network(const Network& network);
