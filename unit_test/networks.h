@@ -119,10 +119,37 @@ TEST(kshell, Square){
     }
 }
 
+TEST(kshell, Barabasi){
+    unsigned nodes(25);
+    unsigned m(8);
+    BarabasiAlbert network(nodes, m, 10);
+//    Graphviz(network, "kshell_BA.dot");
+    std::vector<unsigned> aux;
+    for(size_t i(0); i < network.size(); ++i){
+      unsigned rank(network.GetKshellVertexes(&network[i]));
+      aux.push_back(rank);
+    }
+    EXPECT_TRUE(*std::max_element(aux.begin(), aux.end()) <= m);
+}
+
+TEST(kshell, Erdos_Renyi){
+    unsigned nodes(25);
+    unsigned m(8);
+    ErdosRenyi network(nodes, m*nodes);
+//    Graphviz(network, "kshell_ER.dot");
+    std::vector<unsigned> aux;
+    for(size_t i(0); i < network.size(); ++i){
+      unsigned rank(network.GetKshellVertexes(&network[i]));
+      aux.push_back(rank);
+    }
+    EXPECT_TRUE(*std::max_element(aux.begin(), aux.end()) <= m);
+}
+
+//partial example(right) of reference arXiv:cs/0310049v1
 TEST(kshell, SimpleNet){
   class NetTest: public Network{
     public:
-    NetTest():Network(5, "test"){
+    NetTest():Network(6, "test"){
       Network& network(*this);
       CreateEdge(&network[1], &network[2]);  
       CreateEdge(&network[2], &network[4]);  
@@ -137,5 +164,57 @@ TEST(kshell, SimpleNet){
   EXPECT_EQ(network.GetKshellVertexes(&network[2]), 2);
   EXPECT_EQ(network.GetKshellVertexes(&network[3]), 2);
   EXPECT_EQ(network.GetKshellVertexes(&network[4]), 2);
+  EXPECT_EQ(network.GetKshellVertexes(&network[5]), 0);
 }
 
+//partial example(left) of reference arXiv:cs/0310049v1
+TEST(kshell, SimpleNet2){
+  class NetTest: public Network{
+    public:
+    NetTest():Network(15, "test"){
+      Network& network(*this);
+      CreateEdge(&network[0], &network[2]);  
+      CreateEdge(&network[1], &network[2]);  
+      CreateEdge(&network[2], &network[3]);  
+      CreateEdge(&network[2], &network[5]);  
+      CreateEdge(&network[3], &network[4]);  
+      CreateEdge(&network[3], &network[5]);  
+      CreateEdge(&network[4], &network[8]);  
+      CreateEdge(&network[4], &network[9]);  
+      CreateEdge(&network[4], &network[6]);  
+      CreateEdge(&network[6], &network[8]);  
+      CreateEdge(&network[6], &network[9]);  
+      CreateEdge(&network[8], &network[9]);  
+      CreateEdge(&network[5], &network[7]);  
+      CreateEdge(&network[5], &network[10]);  
+      CreateEdge(&network[5], &network[11]);  
+      CreateEdge(&network[7], &network[10]);  
+      CreateEdge(&network[7], &network[11]);  
+      CreateEdge(&network[10], &network[11]);  
+      CreateEdge(&network[9], &network[10]);  
+      CreateEdge(&network[9], &network[12]);  
+      CreateEdge(&network[10], &network[12]);  
+      CreateEdge(&network[10], &network[13]);  
+      CreateEdge(&network[12], &network[13]);  
+      CreateEdge(&network[12], &network[14]);  
+    };
+  } network;
+  //Graphviz(network, "kshell_test2.dot");
+  EXPECT_EQ(network.GetKshellVertexes(&network[0]), 1);
+  EXPECT_EQ(network.GetKshellVertexes(&network[1]), 1);
+  EXPECT_EQ(network.GetKshellVertexes(&network[14]), 1);
+
+  EXPECT_EQ(network.GetKshellVertexes(&network[2]), 2);
+  EXPECT_EQ(network.GetKshellVertexes(&network[3]), 2);
+  EXPECT_EQ(network.GetKshellVertexes(&network[12]), 2);
+  EXPECT_EQ(network.GetKshellVertexes(&network[13]), 2);
+
+  EXPECT_EQ(network.GetKshellVertexes(&network[4]), 3);
+  EXPECT_EQ(network.GetKshellVertexes(&network[6]), 3);
+  EXPECT_EQ(network.GetKshellVertexes(&network[8]), 3);
+  EXPECT_EQ(network.GetKshellVertexes(&network[9]), 3);
+  EXPECT_EQ(network.GetKshellVertexes(&network[5]), 3);
+  EXPECT_EQ(network.GetKshellVertexes(&network[7]), 3);
+  EXPECT_EQ(network.GetKshellVertexes(&network[10]), 3);
+  EXPECT_EQ(network.GetKshellVertexes(&network[11]), 3);
+}

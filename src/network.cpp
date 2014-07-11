@@ -148,12 +148,6 @@ void Decrement(Vertex* vertex, std::vector<std::pair<Vertex*, unsigned>> &core){
 }
 
 void Network::BuildKshell(){
-//  for(auto& i: vertexes){
-//      std::cout <<  &i;
-//      for(size_t j(0); j < i.size(); ++j)
-//        std::cout << " " << &i[j];
-//      std::cout << std::endl;
-//  }
   typedef std::pair<Vertex*, unsigned> bin;
   std::vector<bin> core;
   //building the core
@@ -163,11 +157,6 @@ void Network::BuildKshell(){
   }
   std::sort(core.begin(), core.end(), [] (bin a, bin b)
       {return a.second < b.second;});
-
-//  for(std::vector<bin>::iterator it(core.begin());
-//      it != core.end(); ++it){
-//    std::cout << it->first << " " << it->second << std::endl;
-//  }
 
   //get the vertex within the shell
   unsigned shell(core.begin()->second);
@@ -182,11 +171,6 @@ void Network::BuildKshell(){
       std::sort(core.begin(), core.end(), [] (bin a, bin b)
           {return a.second < b.second;});
       it = core.begin();
-//      std::cout << std::endl;
-//          for(std::vector<bin>::iterator it(core.begin());
-//              it != core.end(); ++it){
-//            std::cout << it->first << " " << it->second << std::endl;
-//          }
     }
     ++shell;
   }

@@ -6,7 +6,7 @@ BarabasiAlbert::BarabasiAlbert(unsigned size,  unsigned connections, unsigned in
     //init the network
     Network& network(*this);
     Vertex *aux_vertex(NewVertex());
-    for (size_t i = 0; i < initial_population - 2; ++i) {
+    for (size_t i = 0; i < initial_population; ++i) {
         Vertex *new_vertex(NewVertex());
         this->CreateEdge(aux_vertex, new_vertex);
         frequency.push_back(aux_vertex); 
