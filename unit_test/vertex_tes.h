@@ -1,6 +1,8 @@
 #ifndef VERTEX_TES_H
 #define VERTEX_TES_H 
 
+using namespace network_models;
+
 TEST(vertex, add){
 
     Vertex to1;

@@ -14,43 +14,51 @@
 
 #include "vertex.h"
 
-class Network{
+namespace network_models{
+
+  class Network{
     public:
-        Vertex& operator[](unsigned index);
-        unsigned size() const;
-        std::string GetModelName();
-        double GetMeanConnectivity();
-        unsigned GetKshellVertexes(Vertex* target);
-        virtual ~Network() = 0;
+      typedef std::deque<Vertex> container;
+      typedef container::iterator iterator;
 
+      Vertex& operator[](unsigned index);
+      unsigned size() const;
+      iterator begin();
+      iterator end();
+
+      std::string GetModelName();
+      double GetMeanConnectivity();
+      unsigned GetKshellVertexes(Vertex& target);
+      virtual ~Network() = 0;
     protected:
-        Network(unsigned size, std::string model_name);
+      Network(unsigned size, std::string model_name);
 
-        Vertex* NewVertex();
-        void CreateEdge(Vertex* v1, Vertex* v2);
-        const std::deque<Vertex> get_vertexes();
+      Vertex* NewVertex();
+      void CreateEdge(Vertex* v1, Vertex* v2);
+      const container get_vertexes();
 
     private:
-        std::deque<Vertex> vertexes;
-        std::string model_name;
+      container vertexes;
+      std::string model_name;
 
-        //k-shell algorithm (ref arXiv:cs/0310049v1)
-        typedef std::unordered_map<Vertex*, unsigned> shell_map;
-        shell_map kshell;
-        void BuildKshell();
-        //the Network class should never be copied!
-        Network& operator=(const Network& network);
-        Network(const Network& network);
-};
+      //k-shell algorithm (ref arXiv:cs/0310049v1)
+      typedef std::unordered_map<Vertex*, unsigned> shell_map;
+      shell_map kshell;
+      void BuildKshell();
 
-typedef std::pair<unsigned, unsigned> bin;
-std::vector<bin> NodesDistribution(Network& neteork);
+      //the Network class should never be copied!
+      Network& operator=(const Network& network);
+      Network(const Network& network);
+  };
 
-void Graphviz(Network& network, std::string file_name);
+  typedef std::pair<unsigned, unsigned> bin;
+  std::vector<bin> NodesDistribution(Network& neteork);
 
-//Burn for Mark
+  void Graphviz(Network& network, std::string file_name);
 
-std::set<Vertex*> Burn(Vertex* vertex);
-std::map<int,std::vector<unsigned>> Clusters(Network& network);
+  //Burn for Mark
+  std::set<Vertex*> Burn(Vertex* vertex);
+  std::map<int,std::vector<unsigned>> Clusters(Network& network);
 
+} // namespace end
 #endif /* NETWORK_H */

@@ -7,11 +7,14 @@
 #include "network.h"
 
 
-class Square: public Network
-{
-    public:
-        Square(unsigned nodes);
-    private:
-};
+namespace network_models{
 
+  class Square: public Network
+  {
+    public:
+      Square(unsigned nodes);
+    private:
+  };
+
+} //namespace end
 #endif /* SQUARE_H */

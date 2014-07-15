@@ -8,6 +8,7 @@
 
 int main(int argc, char *argv[])
 {
+  using namespace network_models;
     for (int i = 1; i < argc; ++i)
     {
         if(std::string(argv[i]) == std::string("--erdos-renyi"))

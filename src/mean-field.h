@@ -7,11 +7,15 @@
 #include "network.h"
 
 
-class MeanField: public Network
-{
+namespace network_models{
+
+  class MeanField: public Network
+  {
     public:
-        MeanField(unsigned nodes);
+      MeanField(unsigned nodes);
     private:
-};
+  };
+
+} // namespace end
 
 #endif /* MEAN_FIELD_H */

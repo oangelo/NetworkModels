@@ -7,14 +7,16 @@
 
 #include "network.h" 
 
-class BarabasiAlbert: public Network{
-    public:
-        BarabasiAlbert(unsigned size, unsigned connections, unsigned initial_population);
-    private:
-        std::random_device random_dev;
-        std::mt19937 random_generator;
-        void PreferentialAttachment(unsigned connections, Vertex& vertex);
-        std::vector<Vertex*> frequency;
-};
+namespace network_models{
 
+  class BarabasiAlbert: public Network{
+    public:
+      BarabasiAlbert(unsigned size, unsigned connections, unsigned initial_population);
+    private:
+      std::random_device random_dev;
+      std::mt19937 random_generator;
+      void PreferentialAttachment(unsigned connections, Vertex& vertex);
+      std::vector<Vertex*> frequency;
+  };
+}
 #endif /* BARABASI_ALBERT_H */

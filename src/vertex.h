@@ -10,35 +10,35 @@
 #include "edge.h"
 
 
-//Class vertex are use to model the nodes of the network and it properties
-class Edge;
+namespace network_models{
+  class Edge;
 
-class Vertex{
+  class Vertex{
     public:
-        Vertex();
+      Vertex();
 
-        Vertex& operator[](size_t index);
-        Edge& operator()(size_t index);
+      Vertex& operator[](size_t index);
+      Edge& operator()(size_t index);
 
-        Edge* FindIncoming(Vertex* vertex);
-        
-        unsigned size() const;
+      Edge* FindIncoming(Vertex* vertex);
 
-        bool Add(const Edge& element);
-        void AddIncoming(Vertex* vertex, Edge* edge);
-        void Remove(const Edge& element);
+      unsigned size() const;
+
+      bool Add(const Edge& element);
+      void AddIncoming(Vertex* vertex, Edge* edge);
+      void Remove(const Edge& element);
 
 
-        void SetMark(int i);
-        int GetMark() const;
-        
+      void SetMark(int i);
+      int GetMark() const;
+
     private:
-        Vertex& operator=(Vertex&);
-        std::deque<Edge> edges; 
-        int mark;
-        std::map<Vertex*,Edge*> incoming;
-};
+      Vertex& operator=(Vertex&);
+      std::deque<Edge> edges; 
+      int mark;
+      std::map<Vertex*,Edge*> incoming;
+  };
 
-bool operator==(const Vertex& rhs, const Vertex& lhs);
-
+  bool operator==(const Vertex& rhs, const Vertex& lhs);
+}
 #endif /* VERTEX_H */

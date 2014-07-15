@@ -1,6 +1,8 @@
 #ifndef EDGE_TES_H
 #define EDGE_TES_H 
 
+using namespace network_models;
+
 TEST(edge, build){
     Vertex from; 
     Vertex to; 

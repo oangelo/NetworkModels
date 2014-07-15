@@ -3,25 +3,27 @@
 
 #include "vertex.h"
 
-class Vertex;
+namespace network_models{
+  class Vertex;
 
-class Edge{
+  class Edge{
     public:
-        Edge(Vertex* from, Vertex* to, bool bidirectional = false);
-        Vertex* From() const;
-        Vertex* To() const;
-        bool IsBidirectional() const;
+      Edge(Vertex* from, Vertex* to, bool bidirectional = false);
+      Vertex* From() const;
+      Vertex* To() const;
+      bool IsBidirectional() const;
 
-        void SetMark(int i);
-        int GetMark() const;
+      void SetMark(int i);
+      int GetMark() const;
     private:
-        Vertex* from;
-        Vertex* to;
-        bool bidirectional;
-        int mark;
-};
+      Vertex* from;
+      Vertex* to;
+      bool bidirectional;
+      int mark;
+  };
 
 
-bool operator==(const Edge& rhs, const Edge& lhs);
+  bool operator==(const Edge& rhs, const Edge& lhs);
+}
 
 #endif /* EDGE_H */
