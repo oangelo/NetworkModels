@@ -3,6 +3,9 @@
 namespace network_models{
   Vertex::Vertex(): edges(), mark(0), incoming() {}
 
+  Vertex::iterator Vertex::begin(){return edges.begin();}
+  Vertex::iterator Vertex::end(){return edges.end();}
+
   Vertex& Vertex::operator[](size_t index){
     return *edges[index].To();
   }

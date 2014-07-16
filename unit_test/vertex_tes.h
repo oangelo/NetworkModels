@@ -22,6 +22,24 @@ TEST(vertex, add){
     EXPECT_FALSE(vert.Add(ed3));
 }
 
+TEST(vertex, iterator){
+    Vertex to1;
+    Vertex to2;
+    Vertex to3;
+
+    Vertex vert;
+    Edge ed1(&vert, &to1);
+    Edge ed2(&vert, &to2);
+    Edge ed3(&vert, &to3);
+
+    vert.Add(ed1);
+    vert.Add(ed2);
+    vert.Add(ed3);
+    EXPECT_EQ(*vert.begin(), ed1);
+    EXPECT_EQ(*(vert.begin()+1), ed2);
+    EXPECT_EQ(*(vert.end()-1), ed3);
+}
+
 TEST(vertex, remove){
     Vertex to1;
     Vertex to2;

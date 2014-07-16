@@ -2,6 +2,7 @@
 #include "network_models/erdos-renyi.h"
 #include "network_models/square.h"
 #include "network_models/mean-field.h"
+#include <fstream>
 
 using namespace network_models;
 
@@ -38,10 +39,23 @@ TEST(erdos_renyi, distribution){
 }
 
 TEST(BarabasiAlbert, distribution){
-    BarabasiAlbert network(10000, 1, 5);
-    auto hist(NodesDistribution(network));
+    BarabasiAlbert network(10000, 5, 5);
+    std::vector<unsigned> degrees;
+    for(Network::iterator it(network.begin());
+        it != network.end(); ++it){
+      degrees.push_back(it->size());
+    }
+    std::sort(degrees.begin(), degrees.end(), [] (unsigned a, unsigned b){return a > b;});
+    std::ofstream myfile;
+    myfile.open ("barabasi_dist.txt");
+    for(auto i: degrees)
+      myfile << i << std::endl;
+
+//    auto hist(NodesDistribution(network));
+//    std::ofstream myfile;
+//    myfile.open ("barabasi_dist.txt");
 //    for(auto i: hist)
-//      std::cout << i.first << " " << i.second << std::endl;
+//      myfile << i.first << " " << i.second << std::endl;
 }
 
 TEST(erdos_renyi, MeanConnectivety){
