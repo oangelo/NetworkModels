@@ -33,6 +33,10 @@ Implemented Networks:
 
 [Square-Lattice](http://en.wikipedia.org/wiki/Lattice_graph)
 
+#Network Measures
+
+[k-shell](http://arxiv.org/abs/cs/0310049)
+
 #How to use:
 
 - Link the lib with: -lnetmodels
