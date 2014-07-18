@@ -9,6 +9,7 @@
 #include "network_models/vertex.h"
 #include "network_models/network.h"
 #include "network_models/erdos-renyi.h"
+#include "network_models/measures.h"
 #include "vertex_tes.h"
 #include "edge_tes.h"
 

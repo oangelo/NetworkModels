@@ -2,6 +2,7 @@
 #include "network_models/erdos-renyi.h"
 #include "network_models/square.h"
 #include "network_models/mean-field.h"
+#include "network_models/measures.h"
 #include <fstream>
 
 using namespace network_models;
@@ -50,12 +51,6 @@ TEST(BarabasiAlbert, distribution){
     myfile.open ("barabasi_dist.txt");
     for(auto i: degrees)
       myfile << i << std::endl;
-
-//    auto hist(NodesDistribution(network));
-//    std::ofstream myfile;
-//    myfile.open ("barabasi_dist.txt");
-//    for(auto i: hist)
-//      myfile << i.first << " " << i.second << std::endl;
 }
 
 TEST(erdos_renyi, MeanConnectivety){
@@ -233,4 +228,57 @@ TEST(kshell, SimpleNet2){
   EXPECT_EQ(network.GetKshellVertexes(network[7]), 3);
   EXPECT_EQ(network.GetKshellVertexes(network[10]), 3);
   EXPECT_EQ(network.GetKshellVertexes(network[11]), 3);
+}
+
+
+TEST(ShortPaths, OnePath){
+  class NetTest: public Network{
+    public:
+    NetTest():Network(8, "test"){
+      Network& network(*this);
+      CreateEdge(&network[1], &network[2]);  
+      CreateEdge(&network[2], &network[3]);  
+      CreateEdge(&network[3], &network[4]);  
+      CreateEdge(&network[1], &network[5]);  
+      CreateEdge(&network[5], &network[4]);  
+      CreateEdge(&network[1], &network[6]);  
+      CreateEdge(&network[6], &network[7]);  
+      CreateEdge(&network[7], &network[4]);  
+    };
+  } network;
+
+  std::vector<VertexesSet> paths(ShortestPaths(network[1], network[4], 15));
+  EXPECT_EQ(&network[1], *paths[0].find(&network[1]));
+  EXPECT_EQ(&network[4], *paths[0].find(&network[4]));
+  EXPECT_EQ(&network[5], *paths[0].find(&network[5]));
+
+  EXPECT_EQ(ShortestPaths(network[0], network[4], 15).size(), 0);
+}
+
+TEST(ShortPaths, TwoPaths){
+  class NetTest: public Network{
+    public:
+    NetTest():Network(8, "test"){
+      Network& network(*this);
+      CreateEdge(&network[1], &network[0]);  
+      CreateEdge(&network[0], &network[4]);  
+      CreateEdge(&network[1], &network[2]);  
+      CreateEdge(&network[2], &network[3]);  
+      CreateEdge(&network[3], &network[4]);  
+      CreateEdge(&network[1], &network[5]);  
+      CreateEdge(&network[5], &network[4]);  
+      CreateEdge(&network[1], &network[6]);  
+      CreateEdge(&network[6], &network[7]);  
+      CreateEdge(&network[7], &network[4]);  
+    };
+  } network;
+  std::vector<VertexesSet> paths(ShortestPaths(network[1], network[4], 15));
+
+  EXPECT_EQ(&network[1], *paths[0].find(&network[1]));
+  EXPECT_EQ(&network[4], *paths[0].find(&network[4]));
+  EXPECT_EQ(&network[0], *paths[0].find(&network[0]));
+
+  EXPECT_EQ(&network[1], *paths[1].find(&network[1]));
+  EXPECT_EQ(&network[4], *paths[1].find(&network[4]));
+  EXPECT_EQ(&network[5], *paths[1].find(&network[5]));
 }
