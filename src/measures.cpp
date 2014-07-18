@@ -15,11 +15,11 @@ namespace network_models{
     return aux;
   }
 
-  std::vector<VertexesSet> ShortestPaths(Vertex& begin, Vertex& end, size_t max_iterations){
+  Paths ShortestPaths(Vertex& begin, Vertex& end, size_t max_iterations){
     std::deque<Path> old_paths;
     std::deque<Path> new_paths;
     
-    std::vector<VertexesSet> short_paths;
+    Paths short_paths;
     VertexesSet visited;
     Path path;
     bool found(false);
@@ -55,6 +55,22 @@ namespace network_models{
       }
     }
     return short_paths;
+  }
+
+  AllShortestPaths::AllShortestPaths(Network& network){
+    Network::iterator i,j;
+    for(i = network.begin(); i < network.end(); ++i)
+      for(j = (i+1); j < network.end(); ++j){
+        all_spaths[&(*i)][&(*j)] = network_models::ShortestPaths(*i, *j, network.size()); 
+      }
+  }
+
+  Paths AllShortestPaths::GetPaths(Vertex& a, Vertex& b){
+    if(all_spaths.find(&a) != all_spaths.end()){
+      return all_spaths[&a][&b];
+    }else{
+      return all_spaths[&b][&a];
+    }
   }
 
 } //namespace network_models 

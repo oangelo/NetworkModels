@@ -282,3 +282,35 @@ TEST(ShortPaths, TwoPaths){
   EXPECT_EQ(&network[4], *paths[1].find(&network[4]));
   EXPECT_EQ(&network[5], *paths[1].find(&network[5]));
 }
+
+TEST(ShortPaths, All){
+  class NetTest: public Network{
+    public:
+    NetTest():Network(8, "test"){
+      Network& network(*this);
+      CreateEdge(&network[1], &network[2]);  
+      CreateEdge(&network[2], &network[3]);  
+      CreateEdge(&network[3], &network[4]);  
+      CreateEdge(&network[1], &network[5]);  
+      CreateEdge(&network[5], &network[4]);  
+      CreateEdge(&network[1], &network[6]);  
+      CreateEdge(&network[6], &network[7]);  
+      CreateEdge(&network[7], &network[4]);  
+    };
+  } network;
+
+  std::map<unsigned, unsigned> size;
+  size[2]=0;
+  size[3]=0;
+  size[4]=0;
+
+  AllShortestPaths s(network);
+  for(size_t m(0); m < 8; ++m)
+    for(size_t n(m + 1); n < 8; ++n)
+      for(auto i: s.GetPaths(network[m], network[n])){
+        ++(size[i.size()]);
+      }
+  EXPECT_EQ(size[2], 8);
+  EXPECT_EQ(size[3], 11);
+  EXPECT_EQ(size[4], 4);
+}
