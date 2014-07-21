@@ -22,6 +22,16 @@ namespace network_models{
       std::unordered_map<Vertex*, std::unordered_map<Vertex*, Paths>> all_spaths; 
   };
 
+  class BetweennessCentrality{
+    public:
+      BetweennessCentrality(Network& network, AllShortestPaths& paths);
+      double GetBetweenness(Vertex* v);
+    private:
+      std::unordered_map<Vertex*, std::pair<unsigned, unsigned>> betweenness; 
+      void HungerBetweenness(Network& network, AllShortestPaths& paths);
+  };
+
+
 } //namespace network_model
 
 #endif /* MEASURES_H */
