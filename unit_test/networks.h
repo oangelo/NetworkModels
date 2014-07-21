@@ -338,9 +338,9 @@ TEST(Betweenness, simple){
 
   AllShortestPaths s(network);
   BetweennessCentrality b(network, s);
-  EXPECT_NEAR(b.GetBetweenness(&(network[3])), 0.047619, 0.00001);
-  EXPECT_NEAR(b.GetBetweenness(&(network[4])), 0.047619, 0.00001);
-  EXPECT_NEAR(b.GetBetweenness(&(network[6])), 0.047619, 0.00001);
+  EXPECT_NEAR(b.GetBetweenness(&(network[3])), 0.380952, 0.00001);
+  EXPECT_NEAR(b.GetBetweenness(&(network[4])), 0.428571, 0.00001);
+  EXPECT_NEAR(b.GetBetweenness(&(network[6])), 0.380952, 0.00001);
   EXPECT_NEAR(b.GetBetweenness(&(network[1])), 0.0, 0.00001);
   EXPECT_NEAR(b.GetBetweenness(&(network[2])), 0.0, 0.00001);
   EXPECT_NEAR(b.GetBetweenness(&(network[5])), 0.0, 0.00001);

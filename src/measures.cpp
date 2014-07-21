@@ -83,9 +83,8 @@ std::unordered_set<Vertex*> PathVertexSet(Paths& paths, Vertex& n, Vertex& m){
 }
 
 void BetweennessCentrality::HungerBetweenness(Network& network, AllShortestPaths& paths){
-    unsigned aux(0);
     for(Vertex& i: network){
-      betweenness[&i] = std::make_pair(aux, aux);
+      betweenness[&i] = 0;
     }
     Network::iterator i, j;
     for(i = network.begin(); i != network.end(); ++i){
@@ -101,8 +100,7 @@ void BetweennessCentrality::HungerBetweenness(Network& network, AllShortestPaths
             }
           }
           if(count_paths > 0){
-            betweenness[v].first += count_paths;
-            betweenness[v].second += shortest.size();
+            betweenness[v] += static_cast<double>(count_paths) / shortest.size();
           }
         }
       }
@@ -115,9 +113,7 @@ void BetweennessCentrality::HungerBetweenness(Network& network, AllShortestPaths
 
   double BetweennessCentrality::GetBetweenness(Vertex* v){
     unsigned net_size(betweenness.size());
-    double value(0);
-    if(betweenness[v].second > 0)
-      value = (static_cast<double>(betweenness[v].first) / betweenness[v].second);
+    double  value(betweenness[v]);
     double norm((net_size - 1.0) * (net_size - 2.0)/ 2.0);
     return value/norm;
   }
