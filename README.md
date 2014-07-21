@@ -36,6 +36,9 @@ Implemented Networks:
 #Network Measures
 
 [k-shell](http://arxiv.org/abs/cs/0310049)
+
+[Avarege Path Length](http://en.wikipedia.org/wiki/Average_path_length)
+
 [Betweenness](http://en.wikipedia.org/wiki/Centrality#Betweenness_centrality)
 
 #How to use:
