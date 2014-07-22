@@ -10,8 +10,10 @@
 #include "network_models/network.h"
 #include "network_models/erdos-renyi.h"
 #include "network_models/measures.h"
+
 #include "vertex_tes.h"
 #include "edge_tes.h"
+#include "measures.h"
 
 int main(int argc, char *argv[])
 {

@@ -13,6 +13,7 @@ namespace network_models{
   typedef std::vector<VertexesSet> Paths;
 
   Paths ShortestPaths(Vertex& begin, Vertex& end, size_t max_iterations);
+  std::deque<Path> ShortestPaths_Hunger(Vertex& begin);
 
   class AllShortestPaths{
     public:

@@ -15,6 +15,36 @@ namespace network_models{
     return aux;
   }
 
+  std::deque<Path> ShortestPaths_Hunger(Vertex& source){
+    std::deque<Path> old_paths;
+    std::deque<Path> new_paths;
+    std::deque<Path> short_paths;
+    VertexesSet visited;
+
+    old_paths.push_back(Path({&source}));
+    visited.insert(&source);
+    while(old_paths.size() != 0){
+      while(old_paths.size() != 0){
+        Path path(old_paths.back());
+        old_paths.pop_back();
+        for(Edge& edge: *(path.back())){
+          Vertex* vertex(edge.To()); 
+          if(visited.find(vertex) == visited.end()){
+            Path new_path(NewPath(path, vertex));
+            new_paths.push_front(new_path);
+            short_paths.push_back(new_path);
+          }
+        }
+      }
+      for(Path& v: new_paths){
+        visited.insert(v.back());
+      }
+      old_paths = new_paths;
+      new_paths.clear();
+    }
+    return short_paths;
+  }
+
   Paths ShortestPaths(Vertex& begin, Vertex& end, size_t max_iterations){
     std::deque<Path> old_paths;
     std::deque<Path> new_paths;
@@ -57,12 +87,23 @@ namespace network_models{
     return short_paths;
   }
 
-  AllShortestPaths::AllShortestPaths(Network& network){
-    Network::iterator i,j;
-    for(i = network.begin(); i < network.end(); ++i)
-      for(j = (i+1); j < network.end(); ++j){
-        all_spaths[&(*i)][&(*j)] = network_models::ShortestPaths(*i, *j, network.size()); 
+  AllShortestPaths::AllShortestPaths(Network& network):all_spaths(){
+    Network::iterator i, j;
+    VertexesSet visited;
+    for(i = network.begin(); i != network.end(); ++i)
+      for(j = (i + 1); j != network.end(); ++j)
+          all_spaths[&(*i)][&(*j)] = Paths();
+
+    for(i = network.begin(); i != network.end(); ++i){
+      auto paths(network_models::ShortestPaths_Hunger(*i));
+      for(auto& path: paths){
+        Vertex& j(*path.back());
+        if(visited.find(&j) == visited.end()){
+          all_spaths[&(*i)][&j].push_back(ToSet(path));
+        }
       }
+      visited.insert(&(*i));
+    }
   }
 
   Paths AllShortestPaths::GetPaths(Vertex& a, Vertex& b){
@@ -107,7 +148,7 @@ void BetweennessCentrality::HungerBetweenness(Network& network, AllShortestPaths
     }
   }
 
-  BetweennessCentrality::BetweennessCentrality(Network& network, AllShortestPaths& paths){
+  BetweennessCentrality::BetweennessCentrality(Network& network, AllShortestPaths& paths):betweenness(){
     HungerBetweenness(network, paths);
   }
 
