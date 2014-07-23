@@ -48,7 +48,7 @@ namespace network_models{
   Paths ShortestPaths(Vertex& begin, Vertex& end, size_t max_iterations){
     std::deque<Path> old_paths;
     std::deque<Path> new_paths;
-    
+
     Paths short_paths;
     VertexesSet visited;
     Path path;
@@ -87,69 +87,54 @@ namespace network_models{
     return short_paths;
   }
 
-  AllShortestPaths::AllShortestPaths(Network& network):all_spaths(){
-    Network::iterator i, j;
-    VertexesSet visited;
-    for(i = network.begin(); i != network.end(); ++i)
-      for(j = (i + 1); j != network.end(); ++j)
-          all_spaths[&(*i)][&(*j)] = Paths();
+  VertexesSet  PathVertexSet(Path& path, Vertex& n, Vertex& m){
+    VertexesSet result;
+    for(auto& i: path)
+      if(i != &n and i != &m)
+        result.insert(i);
+    return result;
+  }
 
+  PathsMap ShortPaths(Vertex& source, VertexesSet& visited){
+    PathsMap map;
+    std::deque<Path> paths(network_models::ShortestPaths_Hunger(source));
+    for(Path& i: paths){
+        if(visited.find(i.back()) == visited.end())
+          map[i.back()].push_back(PathVertexSet(i, *i.front(), *i.back()));
+    }
+    return map;
+  }
+
+  void BetweennessCentrality::HungerBetweenness(Network& network){
+    VertexesSet visited;
+    for(Vertex& i: network){
+      betweenness[&i] = 0;
+    }
+    Network::iterator i;
     for(i = network.begin(); i != network.end(); ++i){
-      auto paths(network_models::ShortestPaths_Hunger(*i));
-      for(auto& path: paths){
-        Vertex& j(*path.back());
-        if(visited.find(&j) == visited.end()){
-          all_spaths[&(*i)][&j].push_back(ToSet(path));
-        }
+      PathsMap map(ShortPaths((*i), visited));
+      for(auto& j: map){
+        Paths& paths(j.second);
+        for(auto& path_vertex_set: paths)
+          for(auto& v: path_vertex_set){
+            unsigned count_paths(0);
+            for(auto& path: j.second){
+              auto v_it(path.find(v));
+              if(v_it != path.end()){
+                ++count_paths;
+              }
+            }
+            if(count_paths > 0){
+              betweenness[v] += static_cast<double>(count_paths) / j.second.size();
+            }
+          }
       }
       visited.insert(&(*i));
     }
   }
 
-  Paths AllShortestPaths::GetPaths(Vertex& a, Vertex& b){
-    if(all_spaths.find(&a) != all_spaths.end()){
-      return all_spaths[&a][&b];
-    }else{
-      return all_spaths[&b][&a];
-    }
-  }
-
-std::unordered_set<Vertex*> PathVertexSet(Paths& paths, Vertex& n, Vertex& m){
-  std::unordered_set<Vertex*> result;
-  for(auto& i: paths)
-    for(auto& j: i)
-      if(j != &n and j != &m)
-        result.insert(j);
-  return result;
-}
-
-void BetweennessCentrality::HungerBetweenness(Network& network, AllShortestPaths& paths){
-    for(Vertex& i: network){
-      betweenness[&i] = 0;
-    }
-    Network::iterator i, j;
-    for(i = network.begin(); i != network.end(); ++i){
-      for(j = (i + 1); j != network.end(); ++j){
-        Paths shortest(paths.GetPaths(*i, *j));
-        std::unordered_set<Vertex*> path_vertex_set(PathVertexSet(shortest, *i, *j));
-        for(auto& v: path_vertex_set){
-          unsigned count_paths(0);
-          for(auto& path: shortest){
-            auto v_it(path.find(v));
-            if(v_it != path.end()){
-              ++count_paths;
-            }
-          }
-          if(count_paths > 0){
-            betweenness[v] += static_cast<double>(count_paths) / shortest.size();
-          }
-        }
-      }
-    }
-  }
-
-  BetweennessCentrality::BetweennessCentrality(Network& network, AllShortestPaths& paths):betweenness(){
-    HungerBetweenness(network, paths);
+  BetweennessCentrality::BetweennessCentrality(Network& network):betweenness(){
+    HungerBetweenness(network);
   }
 
   double BetweennessCentrality::GetBetweenness(Vertex* v){
