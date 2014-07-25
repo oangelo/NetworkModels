@@ -6,6 +6,7 @@
 #include <unordered_set>
 
 #include "network.h"
+#include "measures/eigenvector_centrality.h"
 
 namespace network_models{
   typedef std::unordered_set<Vertex*> VertexesSet;

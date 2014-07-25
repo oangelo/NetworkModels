@@ -5,15 +5,15 @@
 
 #include "gtest/gtest.h"
 
-#include "networks.h"
-#include "network_models/vertex.h"
-#include "network_models/network.h"
-#include "network_models/erdos-renyi.h"
-#include "network_models/measures.h"
+#include "../src/vertex.h"
+#include "../src/network.h"
+#include "../src/erdos-renyi.h"
+#include "../src/measures.h"
 
 #include "vertex_tes.h"
 #include "edge_tes.h"
-#include "measures.h"
+#include "measures_test.h"
+#include "networks_test.h"
 
 int main(int argc, char *argv[])
 {

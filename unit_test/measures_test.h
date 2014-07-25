@@ -1,6 +1,7 @@
-#include "network_models/square.h"
-#include "network_models/mean-field.h"
-#include "network_models/measures.h"
+#include "../src/square.h"
+#include "../src/barabasi-albert.h"
+#include "../src/mean-field.h"
+#include "../src/measures.h"
 
 using namespace network_models;
 
@@ -167,8 +168,6 @@ TEST(ShortPaths, TwoPaths){
   EXPECT_EQ(&network[5], *paths[1].find(&network[5]));
 }
 
-
-
 TEST(Betweenness, simple){
   class NetTest: public Network{
     public:
@@ -237,11 +236,41 @@ TEST(Measures, ShortPathsHunger){
 //  BetweennessCentrality b(network);
 //}
 
-TEST(measures, BetweennessDist){
-  BarabasiAlbert network(2000, 3, 5);
-  BetweennessCentrality b(network);
-  std::ofstream file;
-  file.open("betweenness_barabasi.csv");
-  for(auto& i: network)
-    file << b.GetBetweenness(&i) << std::endl;
+//TEST(measures, BetweennessDist){
+//  BarabasiAlbert network(2000, 3, 5);
+//  BetweennessCentrality b(network);
+//  std::ofstream file;
+//  file.open("betweenness_barabasi.csv");
+//  for(auto& i: network)
+//    file << b.GetBetweenness(&i) << std::endl;
+//}
+
+TEST(Measures, EigenVectorCentrality){
+  class NetTest: public Network{
+    public:
+    NetTest():Network(15, "test"){
+      Network& network(*this);
+      CreateEdge(&network[0], &network[1]);  
+      CreateEdge(&network[1], &network[2]);  
+      CreateEdge(&network[1], &network[3]);  
+      CreateEdge(&network[1], &network[4]);  
+      CreateEdge(&network[1], &network[6]);  
+      CreateEdge(&network[4], &network[5]);  
+
+      CreateEdge(&network[0], &network[7]);  
+      CreateEdge(&network[0], &network[8]);  
+      CreateEdge(&network[0], &network[9]);  
+      CreateEdge(&network[0], &network[10]);  
+      CreateEdge(&network[0], &network[11]);  
+      CreateEdge(&network[0], &network[12]);  
+      CreateEdge(&network[0], &network[14]);  
+      CreateEdge(&network[12], &network[13]);  
+    };
+  } network;
+  EigenVectorCentrality evc(network);
+  EXPECT_TRUE(evc.GetMeasure(&network[0]) > evc.GetMeasure(&network[1]));
+  for(size_t i(2); i < network.size(); ++i){
+    EXPECT_TRUE(evc.GetMeasure(&network[1]) > evc.GetMeasure(&network[i]));
+  }
 }
+

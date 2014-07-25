@@ -1,7 +1,7 @@
-#include "network_models/barabasi-albert.h"
-#include "network_models/erdos-renyi.h"
-#include "network_models/square.h"
-#include "network_models/mean-field.h"
+#include "../src/barabasi-albert.h"
+#include "../src/erdos-renyi.h"
+#include "../src/square.h"
+#include "../src/mean-field.h"
 #include <fstream>
 
 using namespace network_models;
