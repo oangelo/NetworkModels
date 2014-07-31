@@ -2,12 +2,12 @@
 #include "../src/erdos-renyi.h"
 #include "../src/square.h"
 #include "../src/mean-field.h"
+#include "../src/real-network.h"
+#include "../src/utilities.h"
 #include <fstream>
 
 using namespace network_models;
 
-class NetworkTest: public Network{
-};
 
 TEST(erdos_renyi, construction){
     ErdosRenyi network(2,3);
@@ -119,4 +119,43 @@ TEST(MeanField, Nodes){
     }
 }
 
+TEST(Network, Real_Networks){
+    //write a square network to a file
+    unsigned nodes = 9;
+    Square network(nodes);
+    std::unordered_map<Vertex*, unsigned> map;
+    for(Network::iterator i(network.begin()); i != network.end(); ++i)
+      map[&(*i)] = std::distance(network.begin(), i);
+    std::ofstream myfile;
+    myfile.open ("square.txt");
+    for(Network::iterator i(network.begin()); i != network.end(); ++i)
+      for(auto& v: *i)
+        myfile << std::distance(network.begin(), i) << "\t" << map[v.To()] << std::endl;
+    //Read Square network from a file and test it
+    RealUndirectedNetwork real("square.txt");
+    for(auto i: NodesDistribution(real)){
+        //No edges with one vertice
+        if(i.first == 1)
+            EXPECT_EQ(i.second, 0);
+        //Only edges on the corners will haeve two vertexes
+        if(i.first == 2)
+            EXPECT_EQ(i.second, 4);
+        //The inside edges will have 4 vertexes
+        if(i.first == 4)
+            EXPECT_EQ(i.second,nodes -(4*sqrt(nodes)-4));
+    }
+}
 
+TEST(Network, isUndirected){
+    unsigned nodes = 9;
+    Square network(nodes);
+    class NetworkTest: public Network{
+      public:
+        NetworkTest():Network(4, "teste"){
+          Network& network(*this);
+          network[0].Add(Edge(&network[0],&network[2]));
+        }
+    } teste;
+    EXPECT_TRUE(IsUndirected(network.begin(), network.end()));
+    EXPECT_FALSE(IsUndirected(teste.begin(), teste.end()));
+}

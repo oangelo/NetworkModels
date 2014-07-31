@@ -16,4 +16,5 @@ namespace network_models{
       std::mt19937 random_gen;
   };
 }
+
 #endif /* ERDOS_RENYI_H */

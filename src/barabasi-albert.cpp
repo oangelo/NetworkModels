@@ -8,7 +8,7 @@ namespace network_models{
     Vertex *aux_vertex(NewVertex());
     for (size_t i = 0; i < initial_population; ++i) {
       Vertex *new_vertex(NewVertex());
-      this->CreateEdge(aux_vertex, new_vertex);
+      this->CreateUndirectedEdge(aux_vertex, new_vertex);
       frequency.push_back(aux_vertex); 
       frequency.push_back(new_vertex); 
       aux_vertex = new_vertex;
@@ -23,7 +23,7 @@ namespace network_models{
     std::uniform_real_distribution<> dist(0, frequency.size() - 1);
     for (size_t j(0); j < connections; ++j) {
       Vertex* prefered_vertex(frequency[dist(random_generator)]);
-      this->CreateEdge(prefered_vertex, &vertex);
+      this->CreateUndirectedEdge(prefered_vertex, &vertex);
       frequency.push_back(prefered_vertex); 
       frequency.push_back(&vertex); 
     }

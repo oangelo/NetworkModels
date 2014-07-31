@@ -7,7 +7,7 @@
 namespace network_models{
 
   template<typename iterator>
-  bool IsBidirectional(iterator begin, iterator end){
+  bool IsUndirected(iterator begin, iterator end){
     for(iterator i(begin); i < end; ++i){
       for(auto& j: *i){
         Vertex& to(*(j.To()));

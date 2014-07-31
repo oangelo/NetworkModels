@@ -11,10 +11,17 @@
 
 namespace network_models{
 
-  class RealNetwork: public Network
+  //Simple Classes to read adjacencies list from a file
+  class RealDirectedNetwork: public Network
   {
     public:
-      RealNetwork(std::string file_name);
+      RealDirectedNetwork(std::string file_name);
+  };
+
+  class RealUndirectedNetwork: public Network
+  {
+    public:
+      RealUndirectedNetwork(std::string file_name);
   };
 
   template<class type>

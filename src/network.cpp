@@ -31,7 +31,7 @@ namespace network_models{
     return (&vertexes.back());
   }
 
-  void Network::CreateEdge(Vertex* v1, Vertex* v2) {
+  void Network::CreateUndirectedEdge(Vertex* v1, Vertex* v2) {
     v1->Add(Edge(v1, v2, true));
     v2->Add(Edge(v2, v1, true));
   }

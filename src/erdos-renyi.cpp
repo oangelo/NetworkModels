@@ -13,7 +13,7 @@ namespace network_models{
         random1 = dis(random_gen);
         random2 = dis(random_gen);
       }
-      CreateEdge(&((*this)[random1]), &((*this)[random2]));
+      CreateUndirectedEdge(&((*this)[random1]), &((*this)[random2]));
       random1=random2;
     }
   }

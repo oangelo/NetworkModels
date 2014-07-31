@@ -9,7 +9,7 @@ namespace network_models{
     for(size_t i = 0; i < nodes; ++i){
       for(size_t j = 0; j < nodes; ++j){
         if(i != j)
-          CreateEdge(&(network[i]), &(network[j]));
+          CreateUndirectedEdge(&(network[i]), &(network[j]));
       }
     }
   }

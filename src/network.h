@@ -34,7 +34,7 @@ namespace network_models{
       Network(unsigned size, std::string model_name);
 
       Vertex* NewVertex();
-      void CreateEdge(Vertex* v1, Vertex* v2);
+      void CreateUndirectedEdge(Vertex* v1, Vertex* v2);
       const container get_vertexes();
 
     private:

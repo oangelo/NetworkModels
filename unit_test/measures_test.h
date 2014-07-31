@@ -47,11 +47,11 @@ TEST(measures, kshellSimpleNet){
     public:
     NetTest():Network(6, "test"){
       Network& network(*this);
-      CreateEdge(&network[1], &network[2]);  
-      CreateEdge(&network[2], &network[4]);  
-      CreateEdge(&network[3], &network[4]);  
-      CreateEdge(&network[3], &network[1]);  
-      CreateEdge(&network[0], &network[1]);  
+      CreateUndirectedEdge(&network[1], &network[2]);  
+      CreateUndirectedEdge(&network[2], &network[4]);  
+      CreateUndirectedEdge(&network[3], &network[4]);  
+      CreateUndirectedEdge(&network[3], &network[1]);  
+      CreateUndirectedEdge(&network[0], &network[1]);  
     };
   } network;
     
@@ -69,30 +69,30 @@ TEST(measures, kshellSimpleNet2){
     public:
     NetTest():Network(15, "test"){
       Network& network(*this);
-      CreateEdge(&network[0], &network[2]);  
-      CreateEdge(&network[1], &network[2]);  
-      CreateEdge(&network[2], &network[3]);  
-      CreateEdge(&network[2], &network[5]);  
-      CreateEdge(&network[3], &network[4]);  
-      CreateEdge(&network[3], &network[5]);  
-      CreateEdge(&network[4], &network[8]);  
-      CreateEdge(&network[4], &network[9]);  
-      CreateEdge(&network[4], &network[6]);  
-      CreateEdge(&network[6], &network[8]);  
-      CreateEdge(&network[6], &network[9]);  
-      CreateEdge(&network[8], &network[9]);  
-      CreateEdge(&network[5], &network[7]);  
-      CreateEdge(&network[5], &network[10]);  
-      CreateEdge(&network[5], &network[11]);  
-      CreateEdge(&network[7], &network[10]);  
-      CreateEdge(&network[7], &network[11]);  
-      CreateEdge(&network[10], &network[11]);  
-      CreateEdge(&network[9], &network[10]);  
-      CreateEdge(&network[9], &network[12]);  
-      CreateEdge(&network[10], &network[12]);  
-      CreateEdge(&network[10], &network[13]);  
-      CreateEdge(&network[12], &network[13]);  
-      CreateEdge(&network[12], &network[14]);  
+      CreateUndirectedEdge(&network[0], &network[2]);  
+      CreateUndirectedEdge(&network[1], &network[2]);  
+      CreateUndirectedEdge(&network[2], &network[3]);  
+      CreateUndirectedEdge(&network[2], &network[5]);  
+      CreateUndirectedEdge(&network[3], &network[4]);  
+      CreateUndirectedEdge(&network[3], &network[5]);  
+      CreateUndirectedEdge(&network[4], &network[8]);  
+      CreateUndirectedEdge(&network[4], &network[9]);  
+      CreateUndirectedEdge(&network[4], &network[6]);  
+      CreateUndirectedEdge(&network[6], &network[8]);  
+      CreateUndirectedEdge(&network[6], &network[9]);  
+      CreateUndirectedEdge(&network[8], &network[9]);  
+      CreateUndirectedEdge(&network[5], &network[7]);  
+      CreateUndirectedEdge(&network[5], &network[10]);  
+      CreateUndirectedEdge(&network[5], &network[11]);  
+      CreateUndirectedEdge(&network[7], &network[10]);  
+      CreateUndirectedEdge(&network[7], &network[11]);  
+      CreateUndirectedEdge(&network[10], &network[11]);  
+      CreateUndirectedEdge(&network[9], &network[10]);  
+      CreateUndirectedEdge(&network[9], &network[12]);  
+      CreateUndirectedEdge(&network[10], &network[12]);  
+      CreateUndirectedEdge(&network[10], &network[13]);  
+      CreateUndirectedEdge(&network[12], &network[13]);  
+      CreateUndirectedEdge(&network[12], &network[14]);  
     };
   } network;
   //Graphviz(network, "kshell_test2.dot");
@@ -121,14 +121,14 @@ TEST(ShortPaths, OnePath){
     public:
     NetTest():Network(8, "test"){
       Network& network(*this);
-      CreateEdge(&network[1], &network[2]);  
-      CreateEdge(&network[2], &network[3]);  
-      CreateEdge(&network[3], &network[4]);  
-      CreateEdge(&network[1], &network[5]);  
-      CreateEdge(&network[5], &network[4]);  
-      CreateEdge(&network[1], &network[6]);  
-      CreateEdge(&network[6], &network[7]);  
-      CreateEdge(&network[7], &network[4]);  
+      CreateUndirectedEdge(&network[1], &network[2]);  
+      CreateUndirectedEdge(&network[2], &network[3]);  
+      CreateUndirectedEdge(&network[3], &network[4]);  
+      CreateUndirectedEdge(&network[1], &network[5]);  
+      CreateUndirectedEdge(&network[5], &network[4]);  
+      CreateUndirectedEdge(&network[1], &network[6]);  
+      CreateUndirectedEdge(&network[6], &network[7]);  
+      CreateUndirectedEdge(&network[7], &network[4]);  
     };
   } network;
 
@@ -145,16 +145,16 @@ TEST(ShortPaths, TwoPaths){
     public:
     NetTest():Network(8, "test"){
       Network& network(*this);
-      CreateEdge(&network[1], &network[0]);  
-      CreateEdge(&network[0], &network[4]);  
-      CreateEdge(&network[1], &network[2]);  
-      CreateEdge(&network[2], &network[3]);  
-      CreateEdge(&network[3], &network[4]);  
-      CreateEdge(&network[1], &network[5]);  
-      CreateEdge(&network[5], &network[4]);  
-      CreateEdge(&network[1], &network[6]);  
-      CreateEdge(&network[6], &network[7]);  
-      CreateEdge(&network[7], &network[4]);  
+      CreateUndirectedEdge(&network[1], &network[0]);  
+      CreateUndirectedEdge(&network[0], &network[4]);  
+      CreateUndirectedEdge(&network[1], &network[2]);  
+      CreateUndirectedEdge(&network[2], &network[3]);  
+      CreateUndirectedEdge(&network[3], &network[4]);  
+      CreateUndirectedEdge(&network[1], &network[5]);  
+      CreateUndirectedEdge(&network[5], &network[4]);  
+      CreateUndirectedEdge(&network[1], &network[6]);  
+      CreateUndirectedEdge(&network[6], &network[7]);  
+      CreateUndirectedEdge(&network[7], &network[4]);  
     };
   } network;
   std::vector<VertexesSet> paths(ShortestPaths(network[1], network[4], 15));
@@ -173,14 +173,14 @@ TEST(Betweenness, simple){
     public:
     NetTest():Network(8, "test"){
       Network& network(*this);
-      CreateEdge(&network[1], &network[2]);  
-      CreateEdge(&network[2], &network[3]);  
-      CreateEdge(&network[1], &network[3]);  
-      CreateEdge(&network[3], &network[4]);  
-      CreateEdge(&network[4], &network[6]);  
-      CreateEdge(&network[6], &network[5]);  
-      CreateEdge(&network[5], &network[7]);  
-      CreateEdge(&network[7], &network[6]);  
+      CreateUndirectedEdge(&network[1], &network[2]);  
+      CreateUndirectedEdge(&network[2], &network[3]);  
+      CreateUndirectedEdge(&network[1], &network[3]);  
+      CreateUndirectedEdge(&network[3], &network[4]);  
+      CreateUndirectedEdge(&network[4], &network[6]);  
+      CreateUndirectedEdge(&network[6], &network[5]);  
+      CreateUndirectedEdge(&network[5], &network[7]);  
+      CreateUndirectedEdge(&network[7], &network[6]);  
     };
   } network;
 
@@ -205,14 +205,14 @@ TEST(Measures, ShortPathsHunger){
     public:
     NetTest():Network(8, "test"){
       Network& network(*this);
-      CreateEdge(&network[1], &network[2]);  
-      CreateEdge(&network[2], &network[3]);  
-      CreateEdge(&network[3], &network[4]);  
-      CreateEdge(&network[1], &network[5]);  
-      CreateEdge(&network[5], &network[4]);  
-      CreateEdge(&network[1], &network[6]);  
-      CreateEdge(&network[6], &network[7]);  
-      CreateEdge(&network[7], &network[4]);  
+      CreateUndirectedEdge(&network[1], &network[2]);  
+      CreateUndirectedEdge(&network[2], &network[3]);  
+      CreateUndirectedEdge(&network[3], &network[4]);  
+      CreateUndirectedEdge(&network[1], &network[5]);  
+      CreateUndirectedEdge(&network[5], &network[4]);  
+      CreateUndirectedEdge(&network[1], &network[6]);  
+      CreateUndirectedEdge(&network[6], &network[7]);  
+      CreateUndirectedEdge(&network[7], &network[4]);  
     };
   } network;
 
@@ -250,21 +250,21 @@ TEST(Measures, EigenVectorCentrality){
     public:
     NetTest():Network(15, "test"){
       Network& network(*this);
-      CreateEdge(&network[0], &network[1]);  
-      CreateEdge(&network[1], &network[2]);  
-      CreateEdge(&network[1], &network[3]);  
-      CreateEdge(&network[1], &network[4]);  
-      CreateEdge(&network[1], &network[6]);  
-      CreateEdge(&network[4], &network[5]);  
+      CreateUndirectedEdge(&network[0], &network[1]);  
+      CreateUndirectedEdge(&network[1], &network[2]);  
+      CreateUndirectedEdge(&network[1], &network[3]);  
+      CreateUndirectedEdge(&network[1], &network[4]);  
+      CreateUndirectedEdge(&network[1], &network[6]);  
+      CreateUndirectedEdge(&network[4], &network[5]);  
 
-      CreateEdge(&network[0], &network[7]);  
-      CreateEdge(&network[0], &network[8]);  
-      CreateEdge(&network[0], &network[9]);  
-      CreateEdge(&network[0], &network[10]);  
-      CreateEdge(&network[0], &network[11]);  
-      CreateEdge(&network[0], &network[12]);  
-      CreateEdge(&network[0], &network[14]);  
-      CreateEdge(&network[12], &network[13]);  
+      CreateUndirectedEdge(&network[0], &network[7]);  
+      CreateUndirectedEdge(&network[0], &network[8]);  
+      CreateUndirectedEdge(&network[0], &network[9]);  
+      CreateUndirectedEdge(&network[0], &network[10]);  
+      CreateUndirectedEdge(&network[0], &network[11]);  
+      CreateUndirectedEdge(&network[0], &network[12]);  
+      CreateUndirectedEdge(&network[0], &network[14]);  
+      CreateUndirectedEdge(&network[12], &network[13]);  
     };
   } network;
   EigenVectorCentrality evc(network);
