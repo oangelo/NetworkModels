@@ -2,6 +2,7 @@
 #define REAL_NETWORK_H 
 
 #include <unordered_set>
+#include <algorithm>
 #include <sstream>
 #include <vector>
 #include <string>
