@@ -190,13 +190,13 @@ TEST(Betweenness, simple){
   size[4]=0;
 
   BetweennessCentrality b(network);
-  EXPECT_NEAR(b.GetBetweenness(&(network[3])), 0.380952, 0.00001);
-  EXPECT_NEAR(b.GetBetweenness(&(network[4])), 0.428571, 0.00001);
-  EXPECT_NEAR(b.GetBetweenness(&(network[6])), 0.380952, 0.00001);
-  EXPECT_NEAR(b.GetBetweenness(&(network[1])), 0.0, 0.00001);
-  EXPECT_NEAR(b.GetBetweenness(&(network[2])), 0.0, 0.00001);
-  EXPECT_NEAR(b.GetBetweenness(&(network[5])), 0.0, 0.00001);
-  EXPECT_NEAR(b.GetBetweenness(&(network[7])), 0.0, 0.00001);
+  EXPECT_NEAR(b(&(network[3])), 0.380952, 0.00001);
+  EXPECT_NEAR(b(&(network[4])), 0.428571, 0.00001);
+  EXPECT_NEAR(b(&(network[6])), 0.380952, 0.00001);
+  EXPECT_NEAR(b(&(network[1])), 0.0, 0.00001);
+  EXPECT_NEAR(b(&(network[2])), 0.0, 0.00001);
+  EXPECT_NEAR(b(&(network[5])), 0.0, 0.00001);
+  EXPECT_NEAR(b(&(network[7])), 0.0, 0.00001);
 }
 
 
@@ -268,9 +268,9 @@ TEST(Measures, EigenVectorCentrality){
     };
   } network;
   EigenVectorCentrality evc(network);
-  EXPECT_TRUE(evc.GetMeasure(&network[0]) > evc.GetMeasure(&network[1]));
+  EXPECT_TRUE(evc(&network[0]) > evc(&network[1]));
   for(size_t i(2); i < network.size(); ++i){
-    EXPECT_TRUE(evc.GetMeasure(&network[1]) > evc.GetMeasure(&network[i]));
+    EXPECT_TRUE(evc(&network[1]) > evc(&network[i]));
   }
 }
 

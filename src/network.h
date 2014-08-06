@@ -52,7 +52,7 @@ namespace network_models{
   };
 
   typedef std::pair<unsigned, unsigned> bin;
-  std::vector<bin> NodesDistribution(Network& neteork);
+  std::vector<bin> NodesDistribution(Network& netework);
 
   void Graphviz(Network& network, std::string file_name);
 

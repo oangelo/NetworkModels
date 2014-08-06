@@ -1,4 +1,4 @@
-#include "measures.h"
+#include "betweenness.h"
 
 namespace network_models{
 
@@ -108,12 +108,12 @@ namespace network_models{
   void BetweennessCentrality::HungerBetweenness(Network& network){
     VertexesSet visited;
     for(Vertex& i: network){
-      betweenness[&i] = 0;
+      map[&i] = 0;
     }
     Network::iterator i;
     for(i = network.begin(); i != network.end(); ++i){
-      PathsMap map(ShortPaths((*i), visited));
-      for(auto& j: map){
+      PathsMap paths_map(ShortPaths((*i), visited));
+      for(auto& j: paths_map){
         Paths& paths(j.second);
         for(auto& path_vertex_set: paths)
           for(auto& v: path_vertex_set){
@@ -125,7 +125,7 @@ namespace network_models{
               }
             }
             if(count_paths > 0){
-              betweenness[v] += static_cast<double>(count_paths) / j.second.size();
+              map[v] += static_cast<double>(count_paths) / j.second.size();
             }
           }
       }
@@ -133,15 +133,15 @@ namespace network_models{
     }
   }
 
-  BetweennessCentrality::BetweennessCentrality(Network& network):betweenness(){
+
+  BetweennessCentrality::BetweennessCentrality(Network& network):Measures(){
     HungerBetweenness(network);
+    //normalizing 
+    unsigned net_size(network.size());
+    double norm((net_size - 1.0) * (net_size - 2.0)/ 2.0);
+    for(Vertex& v: network)
+      map[&v] = map[&v] / norm;
   }
 
-  double BetweennessCentrality::GetBetweenness(Vertex* v){
-    unsigned net_size(betweenness.size());
-    double  value(betweenness[v]);
-    double norm((net_size - 1.0) * (net_size - 2.0)/ 2.0);
-    return value/norm;
-  }
 
 } //namespace network_models 

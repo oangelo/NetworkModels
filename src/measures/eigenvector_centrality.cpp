@@ -15,7 +15,7 @@ namespace network_models{
     return m;
   }
 
-  EigenVectorCentrality::EigenVectorCentrality(Network& network):map()
+  EigenVectorCentrality::EigenVectorCentrality(Network& network): Measures()
   {
     Eigen::MatrixXd A(Adjacency(network));
     Eigen::SelfAdjointEigenSolver<Eigen::MatrixXd> eigensolver(A);
@@ -26,7 +26,4 @@ namespace network_models{
     }
   }
 
-  double EigenVectorCentrality::GetMeasure(Vertex* v){
-    return map[v];
-  }
-}
+} //namespace
