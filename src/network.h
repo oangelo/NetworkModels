@@ -28,7 +28,6 @@ namespace network_models{
 
       std::string GetModelName();
       double GetMeanConnectivity();
-      unsigned GetKshellVertexes(Vertex& target);
       virtual ~Network() = 0;
     protected:
       Network(unsigned size, std::string model_name);
@@ -40,11 +39,6 @@ namespace network_models{
     private:
       container vertexes;
       std::string model_name;
-
-      //k-shell algorithm (ref arXiv:cs/0310049v1)
-      typedef std::unordered_map<Vertex*, unsigned> shell_map;
-      shell_map kshell;
-      void BuildKshell();
 
       //the Network class should never be copied!
       Network& operator=(const Network& network);
