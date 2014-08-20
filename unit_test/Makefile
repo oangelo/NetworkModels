@@ -3,7 +3,7 @@
 
 CC=clang++
 CFLAGS=-c -Wall -Weffc++ -pedantic -std=c++0x  
-LDFLAGS= -lgtest -lm -lpthread  -lpstatistics  -lnetmodels -L ../ -I ../src
+LDFLAGS= -lgtest -lm -lpthread  -lnetmodels -L ../ -I ../src
 SOURCES=   main.cpp  
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=tests
