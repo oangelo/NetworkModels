@@ -13,13 +13,15 @@
 namespace network_models{
 
   //Simple Classes to read adjacencies list from a file
-  class RealDirectedNetwork: public Network
+  template<typename Node>
+  class RealDirectedNetwork: public Network<Node>
   {
     public:
       RealDirectedNetwork(std::string file_name);
   };
 
-  class RealUndirectedNetwork: public Network
+  template<typename Node>
+  class RealUndirectedNetwork: public Network<Node>
   {
     public:
       RealUndirectedNetwork(std::string file_name);
@@ -49,6 +51,57 @@ namespace network_models{
     else std::cout << "Unable to open file" << std::endl; 
     return data;
   }
+
+  void DataAnalysis(const std::vector<std::vector<unsigned>>& data, std::unordered_map<unsigned, unsigned>& map){
+    //Finding the number of vertex
+    std::unordered_set<unsigned> set;
+    for(auto& i: data){
+      set.insert(i[0]);
+      set.insert(i[1]);
+    }
+    unsigned counter(0);
+    for(auto& i: set){
+      map[i] = counter;
+      ++counter;
+    }
+  }
+
+  
+  template<typename Node>
+  RealDirectedNetwork<Node>::RealDirectedNetwork(std::string file_name) : Network<Node>(0, "Real network"){
+    std::vector<std::vector<unsigned>> data(ReadFile<unsigned>(file_name));
+    std::unordered_map<unsigned, unsigned> map;
+    DataAnalysis(data, map);
+    //Creating Vertexes
+    for(size_t i(0); i < map.size(); ++i)
+      this->NewVertex();
+    //Creating network
+    Network<Node>& network(*this);
+    for(auto& i: data){
+      std::cout << map.size() << " " << map[i[0]] << " " << map[i[1]] << std::endl;
+      Vertex* v1(&network[map[i[0]]]);
+      Vertex* v2(&network[map[i[1]]]);
+      v1->Add(Edge(v1, v2));
+    }
+  }
+
+  template<typename Node>
+  RealUndirectedNetwork<Node>::RealUndirectedNetwork(std::string file_name) : Network<Node>(0, "Real network"){
+    std::vector<std::vector<unsigned>> data(ReadFile<unsigned>(file_name));
+    std::unordered_map<unsigned, unsigned> map;
+    DataAnalysis(data, map);
+    //Creating Vertexes
+    for(size_t i(0); i < map.size(); ++i)
+      this->NewVertex();
+    //Creating network
+    Network<Node>& network(*this);
+    for(auto& i: data){
+      Vertex* v1(&network[map[i[0]]]);
+      Vertex* v2(&network[map[i[1]]]);
+      this->CreateUndirectedEdge(v1, v2);
+    }
+  }
+
 
 }  //namespace
 

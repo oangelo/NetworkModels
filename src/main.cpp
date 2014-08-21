@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
         {
             unsigned nodes = atoi(argv[i + 1]);
             unsigned edges = atoi(argv[i + 2]);
-            ErdosRenyi network(nodes, edges);
+            ErdosRenyi<Vertex> network(nodes, edges);
             NodesDistribution(network);
         }
         if(std::string(argv[i]) == std::string("--barabasi-albert"))
@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
             unsigned size = atoi(argv[i + 1]);
             unsigned connections = atoi(argv[i + 2]);
             unsigned initial_population = atoi(argv[i + 3]);
-            BarabasiAlbert network(size, connections, initial_population);
+            BarabasiAlbert<Vertex> network(size, connections, initial_population);
             NodesDistribution(network);
         }
 

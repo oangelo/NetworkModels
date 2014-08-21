@@ -8,7 +8,7 @@ using namespace network_models;
 //the k shell of a square network is 2 for all nodes
 TEST(measures, kshellSquare){
     unsigned nodes = 100;
-    Square network(nodes);
+    Square<Vertex> network(nodes);
     Kshell kshell(network);
     for(size_t i(0); i < network.size(); ++i){
       unsigned rank(kshell(&network[i]));
@@ -19,7 +19,7 @@ TEST(measures, kshellSquare){
 TEST(measures, kshellBarabasi){
     unsigned nodes(25);
     unsigned m(8);
-    BarabasiAlbert network(nodes, m, 10);
+    BarabasiAlbert<Vertex> network(nodes, m, 10);
 //    Graphviz(network, "kshell_BA.dot");
     std::vector<unsigned> aux;
     Kshell kshell(network);
@@ -33,11 +33,11 @@ TEST(measures, kshellBarabasi){
 TEST(measures, kshellErdos_Renyi){
     unsigned nodes(1125);
     unsigned m(8);
-    ErdosRenyi network(nodes, m*nodes);
+    ErdosRenyi<Vertex> network(nodes, m*nodes);
 //    Graphviz(network, "kshell_ER.dot");
     std::vector<unsigned> aux;
     Kshell kshell(network);
-    for(Network::iterator it(network.begin()); it < network.end(); ++it){
+    for(Network<Vertex>::iterator it(network.begin()); it < network.end(); ++it){
       unsigned rank(kshell(&(*it)));
       aux.push_back(rank);
     }
@@ -46,10 +46,10 @@ TEST(measures, kshellErdos_Renyi){
 
 //partial example(right) of reference arXiv:cs/0310049v1
 TEST(measures, kshellSimpleNet){
-  class NetTest: public Network{
+  class NetTest: public Network<Vertex>{
     public:
-    NetTest():Network(6, "test"){
-      Network& network(*this);
+    NetTest():Network<Vertex>(6, "test"){
+      Network<Vertex>& network(*this);
       CreateUndirectedEdge(&network[1], &network[2]);  
       CreateUndirectedEdge(&network[2], &network[4]);  
       CreateUndirectedEdge(&network[3], &network[4]);  
@@ -69,10 +69,10 @@ TEST(measures, kshellSimpleNet){
 
 //partial example(left) of reference arXiv:cs/0310049v1
 TEST(measures, kshellSimpleNet2){
-  class NetTest: public Network{
+  class NetTest: public Network<Vertex>{
     public:
-    NetTest():Network(15, "test"){
-      Network& network(*this);
+    NetTest():Network<Vertex>(15, "test"){
+      Network<Vertex>& network(*this);
       CreateUndirectedEdge(&network[0], &network[2]);  
       CreateUndirectedEdge(&network[1], &network[2]);  
       CreateUndirectedEdge(&network[2], &network[3]);  
@@ -122,10 +122,10 @@ TEST(measures, kshellSimpleNet2){
 
 
 TEST(ShortPaths, OnePath){
-  class NetTest: public Network{
+  class NetTest: public Network<Vertex>{
     public:
-    NetTest():Network(8, "test"){
-      Network& network(*this);
+    NetTest():Network<Vertex>(8, "test"){
+      Network<Vertex>& network(*this);
       CreateUndirectedEdge(&network[1], &network[2]);  
       CreateUndirectedEdge(&network[2], &network[3]);  
       CreateUndirectedEdge(&network[3], &network[4]);  
@@ -146,10 +146,10 @@ TEST(ShortPaths, OnePath){
 }
 
 TEST(ShortPaths, TwoPaths){
-  class NetTest: public Network{
+  class NetTest: public Network<Vertex>{
     public:
-    NetTest():Network(8, "test"){
-      Network& network(*this);
+    NetTest():Network<Vertex>(8, "test"){
+      Network<Vertex>& network(*this);
       CreateUndirectedEdge(&network[1], &network[0]);  
       CreateUndirectedEdge(&network[0], &network[4]);  
       CreateUndirectedEdge(&network[1], &network[2]);  
@@ -174,10 +174,10 @@ TEST(ShortPaths, TwoPaths){
 }
 
 TEST(Betweenness, simple){
-  class NetTest: public Network{
+  class NetTest: public Network<Vertex>{
     public:
-    NetTest():Network(8, "test"){
-      Network& network(*this);
+    NetTest():Network<Vertex>(8, "test"){
+      Network<Vertex>& network(*this);
       CreateUndirectedEdge(&network[1], &network[2]);  
       CreateUndirectedEdge(&network[2], &network[3]);  
       CreateUndirectedEdge(&network[1], &network[3]);  
@@ -206,10 +206,10 @@ TEST(Betweenness, simple){
 
 
 TEST(Measures, ShortPathsHunger){
-  class NetTest: public Network{
+  class NetTest: public Network<Vertex>{
     public:
-    NetTest():Network(8, "test"){
-      Network& network(*this);
+    NetTest():Network<Vertex>(8, "test"){
+      Network<Vertex>& network(*this);
       CreateUndirectedEdge(&network[1], &network[2]);  
       CreateUndirectedEdge(&network[2], &network[3]);  
       CreateUndirectedEdge(&network[3], &network[4]);  
@@ -251,10 +251,10 @@ TEST(Measures, ShortPathsHunger){
 //}
 
 TEST(Measures, EigenVectorCentrality){
-  class NetTest: public Network{
+  class NetTest: public Network<Vertex>{
     public:
-    NetTest():Network(15, "test"){
-      Network& network(*this);
+    NetTest():Network<Vertex>(15, "test"){
+      Network<Vertex>& network(*this);
       CreateUndirectedEdge(&network[0], &network[1]);  
       CreateUndirectedEdge(&network[1], &network[2]);  
       CreateUndirectedEdge(&network[1], &network[3]);  
