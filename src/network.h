@@ -21,6 +21,7 @@ namespace network_models{
     public:
       typedef std::deque<Node> container;
       typedef typename container::iterator iterator;
+      typedef Node VertexType; 
 
       Node& operator[](unsigned index);
       unsigned size() const;

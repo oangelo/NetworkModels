@@ -14,22 +14,24 @@ namespace network_models {
       void BuildKshell(Network<Node>& network);
   };
 
+  template<typename Node>
   struct Comp 
   {
-    Comp(Vertex* v) : v(v) { }
+    Comp(Node* v) : v(v) { }
 
-    bool operator () (std::pair<Vertex*, unsigned>& p)
+    bool operator () (std::pair<Node*, unsigned>& p)
     {
       return (p.first == v);
     }
-    Vertex* v;
+    Node* v;
   };
 
-  void Decrement(Vertex* vertex, std::vector<std::pair<Vertex*, unsigned>> &core){
-    std::vector<std::pair<Vertex*, unsigned>>::iterator it;
-    Vertex& v(*vertex);
+  template<typename Node>
+  void Decrement(Node* vertex, std::vector<std::pair<Node*, unsigned>> &core){
+    typename std::vector<std::pair<Node*, unsigned>>::iterator it;
+    Node& v(*vertex);
     for(size_t k(0); k < v.size(); ++k){
-      it = std::find_if(core.begin(), core.end(), Comp(&(v[k])));
+      it = std::find_if(core.begin(), core.end(), Comp<Node>(&(v[k])));
       if(it != core.end()){
         --(it->second);
       }
@@ -43,10 +45,10 @@ namespace network_models {
 
   template<typename Node>
   void Kshell::BuildKshell(Network<Node>& network){
-    typedef std::pair<Vertex*, unsigned> bin;
+    typedef std::pair<Node*, unsigned> bin;
     std::vector<bin> core;
     //building the core
-    for(std::deque<Vertex>::iterator it(network.begin());
+    for(typename std::deque<Node>::iterator it(network.begin());
         it != network.end(); ++it){
       core.push_back(bin(&(*it), it->size()));
     }
@@ -55,13 +57,13 @@ namespace network_models {
 
     //get the vertex within the shell
     unsigned shell(core.begin()->second);
-    std::vector<Vertex*> on_the_shell;
-    typedef std::vector<bin>::iterator core_it;  
+    std::vector<Node*> on_the_shell;
+    typedef typename std::vector<bin>::iterator core_it;  
     while(core.size() > 0){
       core_it it(core.begin());
       while(it->second <= shell && it != core.end()){
         map[it->first] = shell;
-        Decrement(it->first, core);
+        Decrement<Node>(it->first, core);
         core.erase(it);
         std::sort(core.begin(), core.end(), [] (bin a, bin b)
             {return a.second < b.second;});

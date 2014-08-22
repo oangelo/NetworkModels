@@ -52,20 +52,7 @@ namespace network_models{
     return data;
   }
 
-  void DataAnalysis(const std::vector<std::vector<unsigned>>& data, std::unordered_map<unsigned, unsigned>& map){
-    //Finding the number of vertex
-    std::unordered_set<unsigned> set;
-    for(auto& i: data){
-      set.insert(i[0]);
-      set.insert(i[1]);
-    }
-    unsigned counter(0);
-    for(auto& i: set){
-      map[i] = counter;
-      ++counter;
-    }
-  }
-
+  void DataAnalysis(const std::vector<std::vector<unsigned>>& data, std::unordered_map<unsigned, unsigned>& map);
   
   template<typename Node>
   RealDirectedNetwork<Node>::RealDirectedNetwork(std::string file_name) : Network<Node>(0, "Real network"){
@@ -101,7 +88,6 @@ namespace network_models{
       this->CreateUndirectedEdge(v1, v2);
     }
   }
-
 
 }  //namespace
 
