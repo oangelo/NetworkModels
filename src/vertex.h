@@ -24,6 +24,8 @@ namespace network_models{
       iterator begin();
       iterator end();
 
+      //This is virtual to return the 
+      //correct type when derived
       virtual Vertex& operator[](size_t index);
       Edge& operator()(size_t index);
 
