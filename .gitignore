@@ -11,3 +11,8 @@
 *.lai
 *.la
 *.a
+
+*.pdf
+*.dot
+*.txt
+*.eps
