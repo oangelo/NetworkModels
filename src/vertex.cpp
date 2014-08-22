@@ -59,7 +59,6 @@ namespace network_models{
     }
   }
 
-
   void Vertex::SetMark(int i){
     mark = i;
   }

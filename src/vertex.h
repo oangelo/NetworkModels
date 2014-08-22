@@ -19,11 +19,12 @@ namespace network_models{
       typedef container::iterator iterator;
 
       Vertex();
+      virtual ~Vertex(){};
 
       iterator begin();
       iterator end();
 
-      Vertex& operator[](size_t index);
+      virtual Vertex& operator[](size_t index);
       Edge& operator()(size_t index);
 
       Edge* FindIncoming(Vertex* vertex);
@@ -37,9 +38,11 @@ namespace network_models{
       void SetMark(int i);
       int GetMark() const;
 
+    protected:
+      container edges; 
+
     private:
       Vertex& operator=(Vertex&);
-      container edges; 
       int mark;
       std::unordered_map<Vertex*,Edge*> incoming;
   };

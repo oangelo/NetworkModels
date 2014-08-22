@@ -22,7 +22,7 @@ namespace network_models{
       typedef std::deque<Node> container;
       typedef typename container::iterator iterator;
 
-      Vertex& operator[](unsigned index);
+      Node& operator[](unsigned index);
       unsigned size() const;
       iterator begin();
       iterator end();
@@ -77,7 +77,7 @@ namespace network_models{
   }
 
   template <typename Node>
-  Vertex& Network<Node>::operator[](unsigned index){
+  Node& Network<Node>::operator[](unsigned index){
     return vertexes[index];
   }
 

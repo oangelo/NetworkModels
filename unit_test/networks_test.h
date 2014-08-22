@@ -8,6 +8,31 @@
 
 using namespace network_models;
 
+TEST(Network, Generic){
+class GenericVertex: public Vertex{
+    public:
+        int propriety;
+        virtual GenericVertex& operator[](size_t index){
+            return *dynamic_cast<GenericVertex*>(edges[index].To());
+        }
+};
+class NetTest: public Network<GenericVertex>{
+    public:
+    NetTest():Network<GenericVertex>(2, "test"){
+      Network<GenericVertex>& network(*this);
+      CreateUndirectedEdge(&network[0], &network[1]);  
+    };
+  } network;
+
+  network[0].propriety = 1;
+  network[1].propriety = 2;
+
+  EXPECT_EQ(network.size(), 2);
+  EXPECT_EQ(network[0].propriety, 1);
+  EXPECT_EQ(network[1].propriety, 2);
+  EXPECT_EQ(network[0][0].propriety, 2);
+  EXPECT_EQ(network[1][0].propriety, 1);
+}
 
 TEST(erdos_renyi, construction){
     ErdosRenyi<Vertex> network(2,3);
