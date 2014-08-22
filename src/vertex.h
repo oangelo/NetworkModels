@@ -37,15 +37,11 @@ namespace network_models{
       void AddIncoming(Vertex* vertex, Edge* edge);
       void Remove(const Edge& element);
 
-      void SetMark(int i);
-      int GetMark() const;
-
     protected:
       container edges; 
 
     private:
       Vertex& operator=(Vertex&);
-      int mark;
       std::unordered_map<Vertex*,Edge*> incoming;
   };
 

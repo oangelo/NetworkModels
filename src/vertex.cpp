@@ -1,7 +1,7 @@
 #include "vertex.h"
 
 namespace network_models{
-  Vertex::Vertex(): edges(), mark(0), incoming() {}
+  Vertex::Vertex(): edges(), incoming() {}
 
   Vertex::iterator Vertex::begin(){return edges.begin();}
   Vertex::iterator Vertex::end(){return edges.end();}
@@ -57,14 +57,6 @@ namespace network_models{
         edges.erase(i);
       }
     }
-  }
-
-  void Vertex::SetMark(int i){
-    mark = i;
-  }
-
-  int Vertex::GetMark() const{
-    return(mark);
   }
 
   bool operator==(const Vertex& rhs, const Vertex& lhs){

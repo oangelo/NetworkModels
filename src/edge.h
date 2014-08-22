@@ -8,18 +8,12 @@ namespace network_models{
 
   class Edge{
     public:
-      Edge(Vertex* from, Vertex* to, bool bidirectional = false);
+      Edge(Vertex* from, Vertex* to);
       Vertex* From() const;
       Vertex* To() const;
-      bool IsBidirectional() const;
-
-      void SetMark(int i);
-      int GetMark() const;
     private:
       Vertex* from;
       Vertex* to;
-      bool bidirectional;
-      int mark;
   };
 
 
