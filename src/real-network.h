@@ -65,7 +65,6 @@ namespace network_models{
     //Creating network
     Network<Node>& network(*this);
     for(auto& i: data){
-      std::cout << map.size() << " " << map[i[0]] << " " << map[i[1]] << std::endl;
       Vertex* v1(&network[map[i[0]]]);
       Vertex* v2(&network[map[i[1]]]);
       v1->Add(Edge(v1, v2));

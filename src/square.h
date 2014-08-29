@@ -24,14 +24,10 @@ namespace network_models{
     unsigned m(sqrt(nodes));
     for (size_t i = 0; i < nodes; ++i)
     {
-      if(i > 0 and i % m != 0)
-        this->CreateUndirectedEdge(&((*this)[i]), &((*this)[i - 1]));
-      if((i + 1) % m != 0)
-        this->CreateUndirectedEdge(&((*this)[i]), &((*this)[i + 1]));
-      if(i >= m)
-        this->CreateUndirectedEdge(&((*this)[i]), &((*this)[i - m]));
-      if(i < nodes - m - 1)
-        this->CreateUndirectedEdge(&((*this)[i]), &((*this)[i + m]));
+        if((i + 1) % m != 0)
+          this->CreateUndirectedEdge(&((*this)[i]), &((*this)[i + 1]));
+        if(i >= m)
+          this->CreateUndirectedEdge(&((*this)[i]), &((*this)[i - m]));
     }
   }
 

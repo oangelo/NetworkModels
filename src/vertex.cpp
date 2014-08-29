@@ -26,19 +26,17 @@ namespace network_models{
     return edges.size();
   }
 
-  bool Vertex::Add(const Edge& element){
+  void Vertex::Add(const Edge& element){
     if(element.From() != this){
-      std::cerr << "Trying to add an edge that is not from this vertex" << std::endl;
-      return false;
+      throw std::invalid_argument("Trying to add an edge that is not from this vertex");
     }
     for(auto edge: edges){
       if(edge.To() == element.To()){
-        return false;
+        throw std::invalid_argument("Trying to add an edge that is already in vertex");
       }
     }
     edges.push_back(element);
     element.To()->AddIncoming(this, &edges.back());
-    return true;
   }
 
   void Vertex::AddIncoming(Vertex* vertex, Edge* edge){
@@ -46,17 +44,19 @@ namespace network_models{
   }
 
   void Vertex::Remove(const Edge& element){
-    if(element.From() != this)
-      return;
-    if(element.To() != edges.end()->To()){
-      edges.pop_back();
-      return;
-    }
-    for(auto i(edges.begin()); i != edges.end(); ++i){
-      if((*i).To() == element.To()){
-        edges.erase(i);
-      }
-    }
+    auto it(std::find(edges.begin(), edges.end(), element));
+    if(it == edges.end())
+      throw std::invalid_argument("Can't remove Edge!");
+    else
+      edges.erase(it);
+  }
+
+  void Vertex::Remove(const Vertex& vertex){
+    auto it(std::find_if(edges.begin(), edges.end(), [&vertex](Edge& edge){return edge.To() == &vertex;}));
+    if(it == edges.end())
+      throw std::invalid_argument("Can't remove Edge pointing to the given (Vertex)!");
+    else
+      edges.erase(it);
   }
 
   bool operator==(const Vertex& rhs, const Vertex& lhs){

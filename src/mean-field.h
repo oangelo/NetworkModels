@@ -22,9 +22,8 @@ namespace network_models{
     :Network<Node>(nodes, "mean-field")
   {
     Network<Node>& network(*this);
-    for(size_t i = 0; i < nodes; ++i){
-      for(size_t j = 0; j < nodes; ++j){
-        if(i != j)
+    for(size_t i(0); i < nodes; ++i){
+      for(size_t j(i + 1); j < nodes; ++j){
           this->CreateUndirectedEdge(&(network[i]), &(network[j]));
       }
     }

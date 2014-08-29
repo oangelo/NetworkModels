@@ -44,7 +44,11 @@ namespace network_models{
     std::uniform_real_distribution<> dist(0, frequency.size() - 1);
     for (size_t j(0); j < connections; ++j) {
       Vertex* prefered_vertex(frequency[dist(random_generator)]);
-      this->CreateUndirectedEdge(prefered_vertex, &vertex);
+      try{
+        this->CreateUndirectedEdge(prefered_vertex, &vertex);
+      }catch(std::invalid_argument& e){
+        continue;
+      }
       frequency.push_back(prefered_vertex); 
       frequency.push_back(&vertex); 
     }

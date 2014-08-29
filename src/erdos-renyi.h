@@ -30,7 +30,9 @@ namespace network_models{
         random1 = dis(random_gen);
         random2 = dis(random_gen);
       }
+      try{
       this->CreateUndirectedEdge(&((*this)[random1]), &((*this)[random2]));
+      }catch(std::invalid_argument& e){continue;}
       random1=random2;
     }
   }

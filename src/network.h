@@ -36,6 +36,7 @@ namespace network_models{
 
       Vertex* NewVertex();
       void CreateUndirectedEdge(Vertex* v1, Vertex* v2);
+      void RemoveUndirectedEdge(Vertex* v1, Vertex* v2);
       const container get_vertexes();
 
     private:
@@ -98,6 +99,13 @@ namespace network_models{
     v1->Add(Edge(v1, v2));
     v2->Add(Edge(v2, v1));
   }
+
+  template <typename Node>
+  void Network<Node>::RemoveUndirectedEdge(Vertex* v1, Vertex* v2) {
+    v1->Remove(*v2);
+    v2->Remove(*v1);
+  }
+
 
   template <typename Node>
   std::string Network<Node>::GetModelName(){

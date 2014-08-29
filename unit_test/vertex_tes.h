@@ -17,9 +17,8 @@ TEST(vertex, add){
     EXPECT_EQ(vert.size(), 1);
     vert.Add(ed2);
     EXPECT_EQ(vert.size(), 2);
-    vert.Add(ed2);
-    EXPECT_EQ(vert.size(), 2);
-    EXPECT_FALSE(vert.Add(ed3));
+    EXPECT_THROW(vert.Add(ed2), std::invalid_argument);
+    EXPECT_THROW(vert.Add(ed3), std::invalid_argument);
 }
 
 TEST(vertex, iterator){
@@ -47,6 +46,7 @@ TEST(vertex, remove){
     Vertex vert;
     Edge ed1(&vert, &to1);
     Edge ed2(&vert, &to2);
+    Edge ed3(&to1, &to2);
 
     vert.Add(ed1);
     vert.Add(ed2);
@@ -54,6 +54,25 @@ TEST(vertex, remove){
     vert.Remove(ed2);
     EXPECT_EQ(vert.size(), 1);
     vert.Remove(ed1);
+    EXPECT_EQ(vert.size(), 0);
+    EXPECT_THROW(vert.Remove(ed3), std::invalid_argument);
+}
+
+TEST(vertex, RemoveVertex){
+    Vertex to1;
+    Vertex to2;
+
+    Vertex vert;
+    Edge ed1(&vert, &to1);
+    Edge ed2(&vert, &to2);
+    Edge ed3(&to1, &to2);
+
+    vert.Add(ed1);
+    vert.Add(ed2);
+    EXPECT_EQ(vert.size(), 2);
+    vert.Remove(to1);
+    EXPECT_EQ(vert.size(), 1);
+    vert.Remove(to2);
     EXPECT_EQ(vert.size(), 0);
 }
 
@@ -127,9 +146,9 @@ TEST(vertex, repeated_edge){
     Edge ed1(&vert, &to1);
     Edge ed2(&vert, &to2);
 
-    EXPECT_TRUE(vert.Add(ed1));
-    EXPECT_FALSE(vert.Add(ed1));
-    EXPECT_TRUE(vert.Add(ed2));
+    vert.Add(ed1);
+    EXPECT_THROW(vert.Add(ed1), std::invalid_argument);
+    vert.Add(ed2);
 }
 
 #endif /* VERTEX_TES_H */

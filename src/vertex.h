@@ -6,6 +6,7 @@
 #include <cstddef>
 #include <iostream>
 #include <unordered_map>
+#include <algorithm>
 
 #include "edge.h"
 
@@ -33,9 +34,10 @@ namespace network_models{
 
       unsigned size() const;
 
-      bool Add(const Edge& element);
+      void Add(const Edge& element);
       void AddIncoming(Vertex* vertex, Edge* edge);
       void Remove(const Edge& element);
+      void Remove(const Vertex& vertex);
 
     protected:
       container edges; 
@@ -43,8 +45,10 @@ namespace network_models{
     private:
       Vertex& operator=(Vertex&);
       std::unordered_map<Vertex*,Edge*> incoming;
+
   };
 
   bool operator==(const Vertex& rhs, const Vertex& lhs);
+
 }
 #endif /* VERTEX_H */
