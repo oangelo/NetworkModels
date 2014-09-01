@@ -30,6 +30,10 @@ namespace network_models{
     if(element.From() != this){
       throw std::invalid_argument("Trying to add an edge that is not from this vertex");
     }
+    if(element.To() == this){
+      throw std::invalid_argument("Trying to add an edge that will generate a loop.
+                                   Operation not allowed.");
+    }
     for(auto edge: edges){
       if(edge.To() == element.To()){
         throw std::invalid_argument("Trying to add an edge that is already in vertex");
