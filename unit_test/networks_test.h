@@ -211,4 +211,10 @@ TEST(Network, isUndirected){
   EXPECT_FALSE(IsUndirected(teste.begin(), teste.end()));
 }
 
-
+TEST(Network, BarabasiExtended){
+  BarabasiAlbertExtended<Vertex> network(10000, 100, 50, 0.1, 0.1);
+  std::ofstream myfile;
+  myfile.open ("barabasi_extended.txt");
+  for(auto i: network)
+    myfile << i.size() << std::endl;
+}
