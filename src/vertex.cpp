@@ -31,7 +31,7 @@ namespace network_models{
       throw std::invalid_argument("Trying to add an edge that is not from this vertex");
     }
     if(element.To() == this){
-      throw std::invalid_argument("Trying to add an edge that will generate a loop.
+      throw std::invalid_argument("Trying to add an edge that will generate a loop.\
                                    Operation not allowed.");
     }
     for(auto edge: edges){

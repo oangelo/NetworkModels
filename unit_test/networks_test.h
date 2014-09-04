@@ -5,6 +5,7 @@
 #include "../src/mean-field.h"
 #include "../src/real-network.h"
 #include "../src/utilities.h"
+#include "../src/models/configurational.h"
 #include <fstream>
 
 using namespace network_models;
@@ -212,9 +213,18 @@ TEST(Network, isUndirected){
 }
 
 TEST(Network, BarabasiExtended){
-  BarabasiAlbertExtended<Vertex> network(10000, 100, 50, 0.1, 0.1);
+  BarabasiAlbertExtended<Vertex> network(100, 100, 50, 0.1, 0.1);
   std::ofstream myfile;
   myfile.open ("barabasi_extended.txt");
+  for(auto i: network)
+    myfile << i.size() << std::endl;
+}
+
+TEST(Network, Configurational){
+  unsigned samples(100000);
+  Configurational<Vertex> network(PowerLaw(-1.5, samples, 5, 0.01*samples));
+  std::ofstream myfile;
+  myfile.open ("configurational.txt");
   for(auto i: network)
     myfile << i.size() << std::endl;
 }
