@@ -17,7 +17,7 @@ namespace network_models{
     }
 
     for(auto& i: values){
-      int aux(static_cast<int>(i / min_val));
+      unsigned aux(static_cast<int>(i / min_val));
       if(aux > min and aux < max)
         distribution.push_back(aux);
     }

@@ -26,18 +26,14 @@ namespace network_models{
     random_dev(), random_generator(random_dev()) {
       Network<Node>& network(*this);
 
-      std::sort(distribution.begin(), distribution.end());
       unsigned counter(0);
-      for(unsigned i(0); i < distribution.size() - 1; ++i){
+      for(unsigned i(0); i < distribution.size(); ++i){
         for(unsigned j(0); j < distribution[i]; ++j){
           nodes.push_back(&network[counter]);
         }
         ++counter;
       }
       std::shuffle(nodes.begin(), nodes.end(), random_generator);
-      for(unsigned j(0); j < distribution.back(); ++j){
-        nodes.push_back(&network[counter]);
-      }
 
       double initial_size(nodes.size());
       unsigned iterations(0);
@@ -60,7 +56,7 @@ namespace network_models{
           std::shuffle(nodes.begin(), nodes.end(), random_generator);
         }
         if(iterations % static_cast<unsigned>(initial_size / 100) == 0)
-          std::cerr << "\% of Nodes created " <<  static_cast<int>(100 * (1 - nodes.size() / initial_size)) << "\r";
+          std::cerr << "% of Nodes created " <<  static_cast<int>(100 * (1 - nodes.size() / initial_size)) << "\r";
         if(iterations > threshold * initial_size){
           throw std::range_error("Too many iterations on the configurational model.");
           break;
