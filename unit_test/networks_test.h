@@ -62,13 +62,15 @@ TEST(Network, RemoveUndirected){
   EXPECT_EQ(network[2].size(), 1);
 }
 
-TEST(erdos_renyi, construction){
-  ErdosRenyi<Vertex> network(2,3);
-  EXPECT_EQ(network.size(), 2);
+TEST(Network, ErdosRenyiConstruction){
+  ErdosRenyi<Vertex> network(12,3);
+  EXPECT_EQ(network.size(), 12);
+  EXPECT_THROW(ErdosRenyi<Vertex>(10, 100), std::range_error);
 }
 
-TEST(erdos_renyi, edges){
-  ErdosRenyi<Vertex> network(100,3);
+TEST(Nerwork, ErdosRenyiEdges){
+  unsigned edges(200);
+  ErdosRenyi<Vertex> network(100, edges);
   unsigned sum(0);
   for (size_t i = 0; i < network.size(); ++i)
   {
@@ -77,18 +79,28 @@ TEST(erdos_renyi, edges){
       EXPECT_EQ(&network[i], network[i](j).From());
     }
   }
-  EXPECT_EQ(sum, 6);
+  EXPECT_EQ(sum, 2 * edges);
 }
 
 
-TEST(erdos_renyi, dot){
-  ErdosRenyi<Vertex> network(40,60);
+TEST(Network, ErdosRenyiDot){
+  ErdosRenyi<Vertex> network(40,40);
   Graphviz(network, "erdos_renyi.dot");
 }
 
-TEST(erdos_renyi, distribution){
-  ErdosRenyi<Vertex> network(20,30);
-  NodesDistribution(network);
+TEST(Network, ErdosRenyiDist){
+  ErdosRenyi<Vertex> network(100000,1000000);
+  std::vector<unsigned> degrees;
+  for(Network<Vertex>::iterator it(network.begin());
+      it != network.end(); ++it){
+    degrees.push_back(it->size());
+  }
+  std::sort(degrees.begin(), degrees.end(), [] (unsigned a, unsigned b){return a > b;});
+  std::ofstream myfile;
+  myfile.open ("erdos_dist.txt");
+  for(auto i: degrees)
+    myfile << i << std::endl;
+
 }
 
 TEST(BarabasiAlbert, distribution){

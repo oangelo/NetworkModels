@@ -19,23 +19,34 @@ namespace network_models{
   };
 
   template<typename Node>
-  ErdosRenyi<Node>::ErdosRenyi(unsigned nodes, unsigned edges)
+    ErdosRenyi<Node>::ErdosRenyi(unsigned nodes, unsigned edges)
     :Network<Node>(nodes, "erdos-renyi"), random_device(), random_gen(random_device()) 
-  {
-    std::uniform_int_distribution<> dis(0, nodes - 1);
-    unsigned random1(0), random2(0);
-    for (size_t i = 0; i < edges; ++i)
     {
-      while(random1 == random2){
-        random1 = dis(random_gen);
-        random2 = dis(random_gen);
+      std::uniform_int_distribution<> dis(0, nodes - 1);
+      unsigned random1(0), random2(0);
+      unsigned count(0);
+      unsigned count_all(0);
+      unsigned max_count_all(100*nodes);
+      while(count < edges) 
+      {
+        if(count_all > max_count_all){
+          throw std::range_error("Maximum iterations reached, could not generate Erdos Renyi network.");
+        }
+        while(random1 == random2){
+          random1 = dis(random_gen);
+          random2 = dis(random_gen);
+        }
+        ++count_all;
+        try{
+          this->CreateUndirectedEdge(&((*this)[random1]), &((*this)[random2]));
+          ++count;
+        }catch(std::invalid_argument& e){
+          random1=random2;
+          continue;
+        }
+        random1=random2;
       }
-      try{
-      this->CreateUndirectedEdge(&((*this)[random1]), &((*this)[random2]));
-      }catch(std::invalid_argument& e){continue;}
-      random1=random2;
     }
-  }
 
 }
 
