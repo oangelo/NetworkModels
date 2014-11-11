@@ -11,6 +11,7 @@ namespace network_models{
       Edge(Vertex* from, Vertex* to);
       Vertex* From() const;
       Vertex* To() const;
+      int property;
     private:
       Vertex* from;
       Vertex* to;

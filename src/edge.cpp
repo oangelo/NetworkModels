@@ -3,7 +3,7 @@
 
 namespace network_models{
   Edge::Edge(Vertex* from, Vertex* to)
-    :from(from), to(to) {}
+    :property(0), from(from), to(to) {}
 
   Vertex* Edge::From() const{
     return from;
