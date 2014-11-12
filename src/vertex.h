@@ -7,6 +7,7 @@
 #include <iostream>
 #include <unordered_map>
 #include <algorithm>
+#include <stdexcept>
 
 #include "edge.h"
 
