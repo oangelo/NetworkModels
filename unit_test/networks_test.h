@@ -232,6 +232,10 @@ TEST(Network, BarabasiExtended){
     myfile << i.size() << std::endl;
 }
 
+TEST(Network, BarabasiAlbertConstruction){
+  EXPECT_THROW(BarabasiAlbert<Vertex>(10, 100, 5), std::range_error);
+}
+
 TEST(Network, Configurational){
   unsigned samples(100000);
   Configurational<Vertex> network(PowerLaw(-1.5, samples, 5, 0.01*samples));
