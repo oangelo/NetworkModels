@@ -10,7 +10,7 @@
 #include "../src/erdos-renyi.h"
 #include "../src/measures.h"
 
-#include "burn.h"
+#include "clusters.h"
 //#include "vertex_tes.h"
 //#include "edge_tes.h"
 //#include "measures_test.h"

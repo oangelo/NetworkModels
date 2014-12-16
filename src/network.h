@@ -56,9 +56,6 @@ namespace network_models{
   template<typename Type>
   void Graphviz(Network<Type>& network, std::string file_name);
 
-  template<typename Type>
-  std::map<int,std::vector<unsigned>> Clusters(Network<Type>& network);
-
 
   template <typename Node>
   Network<Node>::Network(unsigned size, std::string model_name)

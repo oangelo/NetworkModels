@@ -20,3 +20,17 @@ std::unordered_set<Vertex*> Burn(Vertex& target, bool(*comparison)(Vertex& a, Ve
   }
   return cluster;
 }
+
+template <typename vertex_type>
+std::vector<std::unordered_set<Vertex*>> Clusters(network_models::Network<vertex_type>& network, bool(*comparison)(Vertex& a, Vertex& b)){
+  std::unordered_set<Vertex*> burned;
+  std::vector<std::unordered_set<Vertex*>> clusters;
+  for(auto& i: network){
+    if(burned.find(&i) == burned.end()){
+      auto aux(Burn(i, comparison));
+      clusters.push_back(aux);
+      burned.insert(aux.begin(), aux.end());
+    }
+  }
+  return clusters;
+}
