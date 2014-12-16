@@ -165,54 +165,5 @@ namespace network_models{
 
     file.close();
   }
-
-//  std::set<Vertex*> Burn(Vertex* vertex){
-//    bool has_neighbors = true;
-//    std::set<Vertex*> cluster;
-//    std::vector<Vertex*> to_search;
-//    to_search.push_back(vertex);
-//    int mark = vertex->GetMark();
-//    while(has_neighbors){
-//      cluster.insert(to_search[to_search.size() - 1]);
-//      Vertex& fire(*to_search[to_search.size() - 1]);
-//      to_search.pop_back();
-//      for(size_t i(0); i < fire.size(); ++i){
-//        if(fire[i].GetMark() == mark && (cluster.find(&fire[i]) == cluster.end())){
-//          to_search.push_back(&fire[i]);
-//        }
-//      }
-//      if(to_search.size() == 0)
-//        has_neighbors = false;
-//    }
-//    return cluster;
-//  }
-
-
-//  template<typename Type>
-//  std::map<int,std::vector<unsigned>> Clusters(Network<Type>& network){
-//    std::map<int, std::vector<unsigned>> size; 
-//    std::set<Vertex*> burnt; 
-//
-//    std::set<int> mark_set;
-//    for(size_t i(0); i < network.size(); ++i){ 
-//      mark_set.insert(network[i].GetMark());
-//    }
-//    for(int i: mark_set){
-//      std::vector<unsigned> aux;
-//      size.insert(std::pair<int, std::vector<unsigned>>(i, aux));
-//    }
-//
-//    for(size_t i(0); i < network.size(); ++i){ 
-//      if(burnt.find(&network[i]) == burnt.end()){
-//        std::set<Vertex*> cluster(Burn(&network[i])); 
-//        size[network[i].GetMark()].push_back(cluster.size());
-//        burnt.insert(cluster.begin(), cluster.end());
-//      }
-//    }
-//    return(size);
-//
-//  }
-
-
 } // namespace end
 #endif /* NETWORK_H */

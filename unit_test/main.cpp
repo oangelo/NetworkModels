@@ -10,10 +10,11 @@
 #include "../src/erdos-renyi.h"
 #include "../src/measures.h"
 
-#include "vertex_tes.h"
-#include "edge_tes.h"
-#include "measures_test.h"
-#include "networks_test.h"
+#include "burn.h"
+//#include "vertex_tes.h"
+//#include "edge_tes.h"
+//#include "measures_test.h"
+//#include "networks_test.h"
 
 int main(int argc, char *argv[])
 {
