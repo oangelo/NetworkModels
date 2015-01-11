@@ -33,7 +33,7 @@ namespace network_models{
       frequency.push_back(new_vertex); 
       aux_vertex = new_vertex;
     }
-    for (size_t i = 0; i < size - initial_population; ++i) {
+    for (size_t i = 0; i < size - initial_population - 1; ++i) {
       Vertex* new_vertex(this->NewVertex());
       PreferentialAttachment(connections, *new_vertex);
     }
