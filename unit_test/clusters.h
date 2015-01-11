@@ -74,12 +74,27 @@ TEST(Network, Clusters_tes){
   net[7].propriety = 1;
   net[8].propriety = 1;
 
-  std::vector<std::unordered_set<Vertex*>> aux;
-  Clusters(net, Compare);
-//  EXPECT_EQ(aux[0].size(), 1);
-//  EXPECT_EQ(aux[1].size(), 5);
-//  EXPECT_EQ(aux[2].size(), 1);
-//  EXPECT_EQ(aux[3].size(), 2);
+  std::vector<std::unordered_set<Vertex*>> aux(Clusters(net, Compare));
+  EXPECT_EQ(aux[0].size(), 1);
+  EXPECT_EQ(aux[1].size(), 5);
+  EXPECT_EQ(aux[2].size(), 1);
+  EXPECT_EQ(aux[3].size(), 2);
+}
+
+TEST(Network, GiantComponent){
+  class NetTest: public Network<GenericVertex>{
+    public:
+      NetTest():Network<GenericVertex>(9, "test"){
+        Network<GenericVertex>& network(*this);
+        CreateUndirectedEdge(&network[1], &network[2]);  
+        CreateUndirectedEdge(&network[1], &network[3]);  
+        CreateUndirectedEdge(&network[1], &network[4]);  
+        CreateUndirectedEdge(&network[1], &network[5]);  
+      };
+  } network;
+  NetTest net;
+  EXPECT_EQ(GiantComponent(net).size(), 5);
+
 }
 
 #endif /* CLUSTERS_H */
