@@ -2,6 +2,11 @@
 
 using namespace network_models;
 
+bool StandardCompare(network_models::Vertex& a, network_models::Vertex& b){
+  a;b;
+  return true;
+}
+
 std::unordered_set<Vertex*> Burn(Vertex& target, bool(*comparison)(Vertex& a, Vertex& b)){
   std::unordered_set<Vertex*> cluster; 
   std::deque<Vertex*> burning; 

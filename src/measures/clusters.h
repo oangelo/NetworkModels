@@ -6,9 +6,7 @@
 #include "../network.h"
 
 //Use this when node proprietis are not important
-bool StandardCompare(network_models::Vertex& a, network_models::Vertex& b){
-    return true;
-}
+bool StandardCompare(network_models::Vertex& a, network_models::Vertex& b);
 
 std::unordered_set<network_models::Vertex*> 
 Burn(network_models::Vertex& target, bool(*comparison)(network_models::Vertex& a, network_models::Vertex& b));
