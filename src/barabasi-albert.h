@@ -12,7 +12,7 @@ namespace network_models{
   template<typename Node>
   class BarabasiAlbert: public Network<Node>{
     public:
-      BarabasiAlbert(unsigned size, unsigned connections, unsigned initial_population = 5);
+      BarabasiAlbert(unsigned size, double connections, unsigned initial_population = 5);
     private:
       std::random_device random_dev;
       std::mt19937 random_generator;
@@ -21,7 +21,7 @@ namespace network_models{
   };
 
   template<typename Node>
-  BarabasiAlbert<Node>::BarabasiAlbert(unsigned size,  unsigned connections, unsigned initial_population)
+  BarabasiAlbert<Node>::BarabasiAlbert(unsigned size,  double connections, unsigned initial_population)
     :Network<Node>(0, "barabasi-albert"), random_dev(), random_generator(random_dev()), frequency()
   {
     //init the network
@@ -33,9 +33,24 @@ namespace network_models{
       frequency.push_back(new_vertex); 
       aux_vertex = new_vertex;
     }
-    for (size_t i = 0; i < size - initial_population - 1; ++i) {
-      Vertex* new_vertex(this->NewVertex());
-      PreferentialAttachment(connections, *new_vertex);
+    //Dealing if halfintegers connections
+    int frac_part(static_cast<int>(modf(connections, &connections)*10));
+    if(frac_part == 5){
+      for (size_t i = 0; i < size - initial_population - 1; ++i) {
+        Vertex* new_vertex(this->NewVertex());
+        if(i % 2){
+          PreferentialAttachment(connections + 1, *new_vertex);
+        }else{
+          PreferentialAttachment(connections, *new_vertex);
+        }
+      }
+    }else if(frac_part == 0){
+      for (size_t i = 0; i < size - initial_population - 1; ++i) {
+        Vertex* new_vertex(this->NewVertex());
+        PreferentialAttachment(connections, *new_vertex);
+      }
+    }else{
+      throw std::invalid_argument("The number of connections must be a interger or a half interger");
     }
   }
 

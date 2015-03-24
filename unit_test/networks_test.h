@@ -103,6 +103,43 @@ TEST(Network, ErdosRenyiDist){
 
 }
 
+TEST(Network, BarabasiMeanDegree){
+  BarabasiAlbert<Vertex> network(10000, 5, 6);
+  std::vector<unsigned> degrees;
+  double sum(0);
+  for(Network<Vertex>::iterator it(network.begin());
+      it != network.end(); ++it){
+    sum += it->size();
+  }
+  EXPECT_NEAR(sum / network.size(), 10, 0.1);
+}
+
+TEST(Network, BarabasiMeanDegreeHalfInteger){
+  BarabasiAlbert<Vertex> network(10000, 5.5, 6);
+  std::vector<unsigned> degrees;
+  double sum(0);
+  for(Network<Vertex>::iterator it(network.begin());
+      it != network.end(); ++it){
+    sum += it->size();
+  }
+  EXPECT_NEAR(sum / network.size(), 11, 0.1);
+}
+
+TEST(Network, BarabasiMeanDegreeBadHalfInteger){
+  EXPECT_THROW(BarabasiAlbert<Vertex> network(10000, 5.7, 6), std::invalid_argument);
+}
+
+TEST(Network, ErdosMeanDegree){
+  ErdosRenyi<Vertex> network(10000, 5*10000);
+  std::vector<unsigned> degrees;
+  double sum(0);
+  for(Network<Vertex>::iterator it(network.begin());
+      it != network.end(); ++it){
+    sum += it->size();
+  }
+  EXPECT_EQ(sum / network.size(), 10);
+}
+
 TEST(BarabasiAlbert, distribution){
   BarabasiAlbert<Vertex> network(10000, 5, 5);
   std::vector<unsigned> degrees;
