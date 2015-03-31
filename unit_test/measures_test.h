@@ -1,6 +1,6 @@
-#include "../src/square.h"
-#include "../src/barabasi-albert.h"
-#include "../src/mean-field.h"
+#include "../src/models/square.h"
+#include "../src/models/barabasi-albert.h"
+#include "../src/models/mean-field.h"
 #include "../src/measures.h"
 
 using namespace network_models;

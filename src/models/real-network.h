@@ -7,7 +7,7 @@
 #include <vector>
 #include <string>
 
-#include "network.h"
+#include "../network.h"
 
 
 namespace network_models{

@@ -7,7 +7,7 @@
 
 #include "../src/vertex.h"
 #include "../src/network.h"
-#include "../src/erdos-renyi.h"
+#include "../src/models/erdos-renyi.h"
 #include "../src/measures.h"
 
 #include "clusters.h"

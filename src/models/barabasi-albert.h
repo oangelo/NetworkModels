@@ -5,7 +5,7 @@
 #include <vector>
 #include <random>
 
-#include "network.h" 
+#include "../network.h" 
 
 namespace network_models{
 

@@ -3,8 +3,8 @@
 
 #include <cstdio>
 
-#include "erdos-renyi.h"
-#include "barabasi-albert.h"
+#include "models/erdos-renyi.h"
+#include "models/barabasi-albert.h"
 
 int main(int argc, char *argv[])
 {

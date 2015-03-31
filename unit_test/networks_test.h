@@ -1,11 +1,11 @@
-#include "../src/barabasi-albert.h"
-#include "../src/barabasi-albert-extended.h"
-#include "../src/erdos-renyi.h"
-#include "../src/square.h"
-#include "../src/mean-field.h"
-#include "../src/real-network.h"
-#include "../src/utilities.h"
+#include "../src/models/barabasi-albert.h"
+#include "../src/models/barabasi-albert-extended.h"
+#include "../src/models/erdos-renyi.h"
+#include "../src/models/square.h"
+#include "../src/models/mean-field.h"
+#include "../src/models/real-network.h"
 #include "../src/models/configurational.h"
+#include "../src/utilities.h"
 #include <fstream>
 
 using namespace network_models;
