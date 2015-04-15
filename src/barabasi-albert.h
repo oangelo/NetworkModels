@@ -34,23 +34,23 @@ namespace network_models{
       aux_vertex = new_vertex;
     }
     //Dealing if halfintegers connections
-    int frac_part(static_cast<int>(modf(connections, &connections)*10));
-    if(frac_part == 5){
+    int frac_part(static_cast<int>(modf(connections, &connections)*100));
+    if(frac_part > 0){
+      std::uniform_real_distribution<> dist_frac(0, 1);
+      double fraction(frac_part/100.0);
       for (size_t i = 0; i < size - initial_population - 1; ++i) {
         Vertex* new_vertex(this->NewVertex());
-        if(i % 2){
+        if(dist_frac(random_generator) < fraction){
           PreferentialAttachment(connections + 1, *new_vertex);
         }else{
           PreferentialAttachment(connections, *new_vertex);
         }
       }
-    }else if(frac_part == 0){
+    }else{
       for (size_t i = 0; i < size - initial_population - 1; ++i) {
         Vertex* new_vertex(this->NewVertex());
         PreferentialAttachment(connections, *new_vertex);
       }
-    }else{
-      throw std::invalid_argument("The number of connections must be a interger or a half interger");
     }
   }
 

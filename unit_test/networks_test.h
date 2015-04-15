@@ -125,8 +125,15 @@ TEST(Network, BarabasiMeanDegreeHalfInteger){
   EXPECT_NEAR(sum / network.size(), 11, 0.1);
 }
 
-TEST(Network, BarabasiMeanDegreeBadHalfInteger){
-  EXPECT_THROW(BarabasiAlbert<Vertex> network(10000, 5.7, 6), std::invalid_argument);
+TEST(Network, BarabasiMeanDegreeGenericFraction){
+  BarabasiAlbert<Vertex> network(10000, 3.25, 6);
+  std::vector<unsigned> degrees;
+  double sum(0);
+  for(Network<Vertex>::iterator it(network.begin());
+      it != network.end(); ++it){
+    sum += it->size();
+  }
+  EXPECT_NEAR(sum / network.size(), 6.5, 0.1);
 }
 
 TEST(Network, ErdosMeanDegree){
