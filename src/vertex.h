@@ -34,7 +34,6 @@ namespace network_models{
       unsigned size() const;
 
       void Add(const Edge& element);
-      void AddIncoming(Vertex* vertex, Edge* edge);
       void Remove(const Edge& element);
       void Remove(const Vertex& vertex);
 

@@ -32,11 +32,6 @@ namespace network_models{
       }
     }
     edges.push_back(element);
-    element.To()->AddIncoming(this, &edges.back());
-  }
-
-  void Vertex::AddIncoming(Vertex* vertex, Edge* edge){
-    incoming[vertex] = edge;
   }
 
   void Vertex::Remove(const Edge& element){
