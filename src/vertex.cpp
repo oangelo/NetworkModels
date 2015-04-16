@@ -14,14 +14,6 @@ namespace network_models{
     return edges[index];
   }
 
-  Edge* Vertex::FindIncoming(Vertex* vertex){
-    Edge* result(NULL);
-    auto search = incoming.find(vertex);
-    if(search != incoming.end()) 
-      result = (*search).second;
-    return result;
-  }
-
   unsigned Vertex::size() const{
     return edges.size();
   }

@@ -31,8 +31,6 @@ namespace network_models{
       virtual Vertex& operator[](size_t index);
       Edge& operator()(size_t index);
 
-      Edge* FindIncoming(Vertex* vertex);
-
       unsigned size() const;
 
       void Add(const Edge& element);
