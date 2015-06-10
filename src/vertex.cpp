@@ -1,7 +1,7 @@
 #include "vertex.h"
 
 namespace network_models{
-  Vertex::Vertex(): edges(), incoming() {}
+  Vertex::Vertex(): edges() {}
 
   Vertex::iterator Vertex::begin(){return edges.begin();}
   Vertex::iterator Vertex::end(){return edges.end();}

@@ -42,7 +42,6 @@ namespace network_models{
 
     private:
       Vertex& operator=(Vertex&);
-      std::unordered_map<Vertex*,Edge*> incoming;
 
   };
 
